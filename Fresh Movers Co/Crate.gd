@@ -4,7 +4,6 @@ extends RigidBody2D
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
-	print(self.is_pickable())
 	self.layers = 0x2
 
 # Helper to set the texture when this is unselected.
