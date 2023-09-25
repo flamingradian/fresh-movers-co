@@ -84,7 +84,6 @@ script = ExtResource( 5 )
 [node name="Crate" parent="ItemManager" instance=ExtResource( 4 )]
 position = Vector2( 508, 875 )
 rotation = 0.698132
-scale = Vector2( 1, 1 )
 
 [node name="Crate2" parent="ItemManager" instance=ExtResource( 4 )]
 position = Vector2( 1000, 920 )

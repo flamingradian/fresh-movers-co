@@ -70,6 +70,7 @@ func _input(event):
 						isInTruck = true
 						isSelected = false
 						itemManager.SetIsItemSelected(false)
+						itemManager.AddItemToTruck()
 						
 						self.set_default_texture()
 						self.layers = 0x1

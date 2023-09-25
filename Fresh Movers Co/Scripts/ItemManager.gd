@@ -1,5 +1,12 @@
 extends Node
 
+var itemsInTruck = 0
+func AddItemToTruck():
+	itemsInTruck += 1
+	if itemsInTruck == get_child_count():
+		print("Level Complete!")
+		
+
 var isItemSelected = false setget SetIsItemSelected, GetIsItemSelected
 func SetIsItemSelected(new_value):
 	isItemSelected = new_value
