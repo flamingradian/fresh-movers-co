@@ -61,29 +61,32 @@ func _on_mouse_exited():
 	if itemManager.GetIsItemSelected() == false and isInTruck == false and isSelected == false:
 		self.set_default_texture()
 
+func on_mouse_pressed():
+	if isSelected:
+		if isHoveringOverTruck == true:
+			if collideCount == 1:
+				isInTruck = true
+				isSelected = false
+				itemManager.SetIsItemSelected(false)
+				itemManager.AddItemToTruck()
+
+				self.set_default_texture()
+				self.layers = 0x1
+				self.gravity_scale = 8
+		else: # Deselect crate
+			isSelected = false
+			itemManager.SetIsItemSelected(false)
+			itemManager.SetDeselectOnly(true)
+	else:
+		if itemManager.GetIsItemSelected() == false and isHovering and isInTruck == false and itemManager.GetDeselectOnly() == false:
+			isSelected = true
+			itemManager.SetIsItemSelected(true)
+			self.set_default_texture()
+
 func _input(event):
 	if event is InputEventMouseButton and event.button_index == BUTTON_LEFT:
 		if event.is_pressed(): # Mouse Press
-			if isSelected:
-				if isHoveringOverTruck == true:
-					if collideCount == 1:
-						isInTruck = true
-						isSelected = false
-						itemManager.SetIsItemSelected(false)
-						itemManager.AddItemToTruck()
-
-						self.set_default_texture()
-						self.layers = 0x1
-						self.gravity_scale = 8
-				else: # Deselect crate
-					isSelected = false
-					itemManager.SetIsItemSelected(false)
-					itemManager.SetDeselectOnly(true)
-			else:
-				if itemManager.GetIsItemSelected() == false and isHovering and isInTruck == false and itemManager.GetDeselectOnly() == false:
-					isSelected = true
-					itemManager.SetIsItemSelected(true)
-					self.set_default_texture()
+			on_mouse_pressed()
 
 		if event.is_pressed() == false: # Mouse Release
 			itemManager.SetDeselectOnly(false)
