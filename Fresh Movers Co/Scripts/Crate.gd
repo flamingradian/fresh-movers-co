@@ -53,12 +53,12 @@ func edit_mode_exit():
 
 func _on_mouse_entered():
 	isHovering = true
-	if itemManager.GetIsItemSelected() == false and isInTruck == false and isSelected == false:
+	if itemManager.GetIsItemSelected() == false and itemManager.GetDeselectOnly() == false and and isInTruck == false:
 		self.set_selected_texture()
 
 func _on_mouse_exited():
 	isHovering = false
-	if itemManager.GetIsItemSelected() == false and isInTruck == false and isSelected == false:
+	if itemManager.GetIsItemSelected() == false and itemManager.GetDeselectOnly() == false and isInTruck == false:
 		self.set_default_texture()
 
 func on_mouse_pressed():
