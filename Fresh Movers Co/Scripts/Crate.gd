@@ -8,11 +8,11 @@ func _ready():
 
 # Helper to set the texture when this is unselected.
 func set_default_texture():
-	$Sprite.texture = load("res://Sprites/crate.png")
+	$NinePatchRect.texture = load("res://Sprites/crate.png")
 
 # Helper to set the texture when this is selected.
 func set_selected_texture():
-	$Sprite.texture = load("res://Sprites/crate_selected.png")
+	$NinePatchRect.texture = load("res://Sprites/crate_selected.png")
 
 # Exit the initial draggable state of the box, allowing it to be subject to
 # physics and unselecting it.
