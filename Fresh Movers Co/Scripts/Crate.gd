@@ -24,11 +24,6 @@ func _ready():
 	truckStorageArea.connect("area_entered", self, "_on_Truck_Area2D_area_entered")
 	truckStorageArea.connect("area_exited", self, "_on_Truck_Area2D_area_exited")
 
-	# Do not check if the 
-	#var truckWalls = get_node("Truck/Floor and Walls/Area2D")
-	#truckWalls.connect("area_entered", self, "_on_Area2D_area_entered")
-	#truckWalls.connect("area_entered", self, "_on_Area2D_area_entered")
-
 func _process(delta):
 	startDetection = true
 	if isSelected:
