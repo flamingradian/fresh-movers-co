@@ -3,12 +3,14 @@
 extends RigidBody2D
 
 var startDetection = false # Objects appear at origin briefly on game start. This will prevent Area2D detection from triggering when that happens
+onready var startTransform = self.get_transform()
 var isInTruck = false
 var isHovering = false
 var isSelected = false
 var isHoveringOverTruck = false
 var collideCount = 0
 
+onready var itemManager = self.get_parent()
 var truckStorageAreaPath = "/root/Level/Truck/Storage Area"
 
 # Called when the node enters the scene tree for the first time.
@@ -27,6 +29,11 @@ func _process(delta):
 	startDetection = true
 	if isSelected:
 		self.position = get_viewport().get_mouse_position()
+		self.z_index = 1
+	else:
+		self.z_index = 0
+		if isInTruck == false:
+			self.transform = startTransform
 		
 
 
@@ -45,28 +52,40 @@ func edit_mode_exit():
 
 func _on_mouse_entered():
 	isHovering = true
-	if not isInTruck:
+	if itemManager.GetIsItemSelected() == false and isInTruck == false and isSelected == false:
 		self.set_selected_texture()
 	
 
 func _on_mouse_exited():
 	isHovering = false
-	if not isInTruck:
+	if itemManager.GetIsItemSelected() == false and isInTruck == false and isSelected == false:
 		self.set_default_texture()
 
 func _input(event):
-	if event.is_pressed() and event.button_index == BUTTON_LEFT:
-		if isSelected and isHoveringOverTruck == true and collideCount == 1:
-			isInTruck = true
-			isSelected = false
-			
-			self.set_default_texture()
-			self.layers = 0x1
-			self.gravity_scale = 8
-			
-		else:
-			if isHovering and not isInTruck:
-				isSelected = true
+	if event is InputEventMouseButton and event.button_index == BUTTON_LEFT:
+		if event.is_pressed(): # Mouse Press
+			if isSelected:
+				if isHoveringOverTruck == true:
+					if collideCount == 1:
+						isInTruck = true
+						isSelected = false
+						itemManager.SetIsItemSelected(false)
+						
+						self.set_default_texture()
+						self.layers = 0x1
+						self.gravity_scale = 8
+				else: # Deselect crate
+					isSelected = false
+					itemManager.SetIsItemSelected(false)
+					itemManager.SetDeselectOnly(true)
+			else:
+				if itemManager.GetIsItemSelected() == false and isHovering and isInTruck == false and itemManager.GetDeselectOnly() == false:
+					isSelected = true
+					itemManager.SetIsItemSelected(true)
+					self.set_default_texture()
+					
+		if event.is_pressed() == false: # Mouse Release
+			itemManager.SetDeselectOnly(false)
 				
 func _on_Area2D_area_entered(area):
 	if startDetection:
