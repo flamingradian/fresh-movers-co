@@ -1,23 +1,20 @@
-[gd_scene load_steps=10 format=2]
+[gd_scene load_steps=8 format=2]
 
 [ext_resource path="res://Sprites/Rock.png" type="Texture" id=1]
 [ext_resource path="res://Sprites/background.png" type="Texture" id=2]
 [ext_resource path="res://Sprites/truck.png" type="Texture" id=3]
-[ext_resource path="res://Sprites/crate.png" type="Texture" id=4]
-[ext_resource path="res://Scripts/Crate.gd" type="Script" id=5]
+[ext_resource path="res://Scenes/Crate.tscn" type="PackedScene" id=4]
 
 [sub_resource type="RectangleShape2D" id=3]
 extents = Vector2( 440, 8 )
 
-[sub_resource type="PhysicsMaterial" id=1]
+[sub_resource type="RectangleShape2D" id=6]
+extents = Vector2( 4, 280 )
 
-[sub_resource type="RectangleShape2D" id=4]
-extents = Vector2( 300, 100 )
+[sub_resource type="RectangleShape2D" id=5]
+extents = Vector2( 440, 280 )
 
-[sub_resource type="RectangleShape2D" id=2]
-extents = Vector2( 100, 300 )
-
-[node name="Node2D" type="Node2D"]
+[node name="Level" type="Node2D"]
 
 [node name="Viewport" type="Viewport" parent="."]
 size = Vector2( 1920, 1080 )
@@ -33,63 +30,57 @@ texture = ExtResource( 2 )
 position = Vector2( 960, 360 )
 texture = ExtResource( 3 )
 
-[node name="StaticBody2D" type="StaticBody2D" parent="Truck"]
-position = Vector2( 0, 240 )
+[node name="Floor and Walls" type="StaticBody2D" parent="Truck"]
+position = Vector2( 0, -44 )
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Truck/StaticBody2D"]
+[node name="CollisionShape2D2" type="CollisionShape2D" parent="Truck/Floor and Walls"]
+position = Vector2( 0, 284 )
 shape = SubResource( 3 )
 
-[node name="Crate" type="RigidBody2D" parent="."]
-position = Vector2( 472, 920 )
-input_pickable = true
-physics_material_override = SubResource( 1 )
-gravity_scale = 0.0
-script = ExtResource( 5 )
+[node name="CollisionShape2D3" type="CollisionShape2D" parent="Truck/Floor and Walls"]
+position = Vector2( 0, -284 )
+shape = SubResource( 3 )
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Crate"]
-shape = SubResource( 4 )
+[node name="CollisionShape2D4" type="CollisionShape2D" parent="Truck/Floor and Walls"]
+position = Vector2( -444, 0 )
+shape = SubResource( 6 )
 
-[node name="NinePatchRect" type="NinePatchRect" parent="Crate"]
-margin_left = -300.0
-margin_top = -100.0
-margin_right = 300.0
-margin_bottom = 100.0
-texture = ExtResource( 4 )
-patch_margin_left = 40
-patch_margin_top = 40
-patch_margin_right = 40
-patch_margin_bottom = 40
-axis_stretch_horizontal = 1
-axis_stretch_vertical = 1
+[node name="CollisionShape2D5" type="CollisionShape2D" parent="Truck/Floor and Walls"]
+position = Vector2( 444, 0 )
+shape = SubResource( 6 )
 
-[node name="Crate2" type="RigidBody2D" parent="."]
-position = Vector2( 1000, 720 )
-input_pickable = true
-physics_material_override = SubResource( 1 )
-gravity_scale = 0.0
-script = ExtResource( 5 )
+[node name="Area2D" type="Area2D" parent="Truck/Floor and Walls"]
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Crate2"]
-shape = SubResource( 2 )
+[node name="CollisionShape2D2" type="CollisionShape2D" parent="Truck/Floor and Walls/Area2D"]
+position = Vector2( 0, 284 )
+shape = SubResource( 3 )
 
-[node name="NinePatchRect" type="NinePatchRect" parent="Crate2"]
-margin_left = -100.0
-margin_top = -300.0
-margin_right = 100.0
-margin_bottom = 300.0
-texture = ExtResource( 4 )
-patch_margin_left = 40
-patch_margin_top = 40
-patch_margin_right = 40
-patch_margin_bottom = 40
-axis_stretch_horizontal = 1
-axis_stretch_vertical = 1
+[node name="CollisionShape2D3" type="CollisionShape2D" parent="Truck/Floor and Walls/Area2D"]
+position = Vector2( 0, -284 )
+shape = SubResource( 3 )
+
+[node name="CollisionShape2D4" type="CollisionShape2D" parent="Truck/Floor and Walls/Area2D"]
+position = Vector2( -444, 0 )
+shape = SubResource( 6 )
+
+[node name="CollisionShape2D5" type="CollisionShape2D" parent="Truck/Floor and Walls/Area2D"]
+position = Vector2( 444, 0 )
+shape = SubResource( 6 )
+
+[node name="Storage Area" type="Area2D" parent="Truck"]
+position = Vector2( 0, -44 )
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Truck/Storage Area"]
+shape = SubResource( 5 )
+
+[node name="Crate" parent="." instance=ExtResource( 4 )]
+
+[node name="Crate2" parent="." instance=ExtResource( 4 )]
+position = Vector2( 1000, 920 )
+
+[node name="Crate3" parent="." instance=ExtResource( 4 )]
+position = Vector2( 1500, 920 )
 
 [node name="Rock" type="Sprite" parent="."]
 position = Vector2( 1365, 921 )
 texture = ExtResource( 1 )
-
-[connection signal="mouse_entered" from="Crate" to="Crate" method="_on_mouse_entered"]
-[connection signal="mouse_exited" from="Crate" to="Crate" method="_on_mouse_exited"]
-[connection signal="mouse_entered" from="Crate2" to="Crate2" method="_on_mouse_entered"]
-[connection signal="mouse_exited" from="Crate2" to="Crate2" method="_on_mouse_exited"]
