@@ -2,7 +2,10 @@
 
 extends RigidBody2D
 
-var startDetection = false # Objects appear at origin briefly on game start. This will prevent Area2D detection from triggering when that happens
+# Objects appear at origin briefly on game start. This will prevent Area2D
+# detection from triggering when that happens.
+var startDetection = false
+
 onready var startTransform = self.get_transform()
 var isInTruck = false
 var isHovering = false
