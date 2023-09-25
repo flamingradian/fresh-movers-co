@@ -1,9 +1,11 @@
+# SPDX-License-Identifier: GPL-3.0-or-later
+
 extends RigidBody2D
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	print(self.is_pickable())
-	pass # Replace with function body.
+	self.layers = 0x2
 
 # Helper to set the texture when this is unselected.
 func set_default_texture():
@@ -17,6 +19,7 @@ func set_selected_texture():
 # physics and unselecting it.
 func edit_mode_exit():
 	self.set_default_texture()
+	self.layers = 0x1
 	self.gravity_scale = 1
 
 func _on_mouse_entered():
