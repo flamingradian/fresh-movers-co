@@ -52,14 +52,26 @@ func set_selected_texture():
 func edit_mode_exit():
 	pass
 
+# Helper function to tell whether this box can be selected.
+#
+# This box can be selected when there is no other box selected, the mouse press
+# is not used for another purpose, and when this box can still be placed.
+#
+# GDScript seems to permit wrapping lines, so separate each statement to avoid
+# a line with more than 80 columns.
+func can_select_box():
+	return not itemManager.GetIsItemSelected() \
+	   and not itemManager.GetDeselectOnly() \
+	   and not isInTruck
+
 func _on_mouse_entered():
 	isHovering = true
-	if itemManager.GetIsItemSelected() == false and itemManager.GetDeselectOnly() == false and isInTruck == false:
+	if can_select_box():
 		self.set_selected_texture()
 
 func _on_mouse_exited():
 	isHovering = false
-	if itemManager.GetIsItemSelected() == false and itemManager.GetDeselectOnly() == false and isInTruck == false:
+	if can_select_box():
 		self.set_default_texture()
 
 func on_mouse_pressed():
@@ -81,7 +93,7 @@ func on_mouse_pressed():
 			itemManager.SetIsItemSelected(false)
 			itemManager.SetDeselectOnly(true)
 	else:
-		if itemManager.GetIsItemSelected() == false and isHovering and isInTruck == false and itemManager.GetDeselectOnly() == false:
+		if can_select_box() and isHovering:
 			isSelected = true
 			itemManager.SetIsItemSelected(true)
 			self.set_default_texture()
