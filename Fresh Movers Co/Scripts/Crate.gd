@@ -24,6 +24,7 @@ func _ready():
 	truckStorageArea.connect("area_entered", self, "_on_Truck_Area2D_area_entered")
 	truckStorageArea.connect("area_exited", self, "_on_Truck_Area2D_area_exited")
 
+	# Do not check if the 
 	#var truckWalls = get_node("Truck/Floor and Walls/Area2D")
 	#truckWalls.connect("area_entered", self, "_on_Area2D_area_entered")
 	#truckWalls.connect("area_entered", self, "_on_Area2D_area_entered")
@@ -64,6 +65,8 @@ func _on_mouse_exited():
 func on_mouse_pressed():
 	if isSelected:
 		if isHoveringOverTruck == true:
+			# We only want the box to collide with one object,
+			# which is the inside of the truck.
 			if collideCount == 1:
 				isInTruck = true
 				isSelected = false
@@ -91,6 +94,7 @@ func _input(event):
 		if event.is_pressed() == false: # Mouse Release
 			itemManager.SetDeselectOnly(false)
 
+# Keep track of how many objects this box is colliding with.
 func _on_Area2D_area_entered(area):
 	if startDetection:
 		collideCount += 1
@@ -99,6 +103,7 @@ func _on_Area2D_area_exited(area):
 	if startDetection:
 		collideCount -= 1
 
+# Keep track of when the box enters the truck.
 func _on_Truck_Area2D_area_entered(area):
 	if startDetection:
 		isHoveringOverTruck = true
