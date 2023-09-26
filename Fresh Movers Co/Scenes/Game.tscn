@@ -1,7 +1,9 @@
-[gd_scene load_steps=3 format=2]
+[gd_scene load_steps=5 format=2]
 
 [ext_resource path="res://Scripts/LevelManager.gd" type="Script" id=1]
 [ext_resource path="res://Sprites/RestartButton.png" type="Texture" id=2]
+[ext_resource path="res://Sprites/RestartButtonHovered.png" type="Texture" id=3]
+[ext_resource path="res://Sprites/RestartButtonPressed.png" type="Texture" id=4]
 
 [node name="Main" type="Node"]
 
@@ -16,3 +18,5 @@ margin_top = 40.0
 margin_right = 1876.0
 margin_bottom = 176.0
 texture_normal = ExtResource( 2 )
+texture_pressed = ExtResource( 4 )
+texture_hover = ExtResource( 3 )
