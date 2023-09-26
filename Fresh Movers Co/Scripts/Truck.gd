@@ -13,11 +13,13 @@ var velocity = Vector2(0, 0)
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
+	isChangingAlpha = true
 	pass
 
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):
+	print(delta)
 	$StorageArea.modulate.a = storageAlpha
 	if Input.is_action_just_pressed("ui_select"):
 		isChangingAlpha = true
@@ -30,7 +32,7 @@ func _process(delta):
 			itemManager.DisableTruckItems()
 		
 	if isDrivingAway:
-		var accel = Vector2(-0.5, 0)
-		velocity += accel
-		self.position = self.position + velocity
+		var accel = Vector2(-1800, 0)
+		velocity += accel * delta
+		self.position = self.position + velocity * delta
 
