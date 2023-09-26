@@ -2,7 +2,6 @@ extends Node
 
 
 var score = 0
-
 var levelNum = 0
 
 var levels = [
@@ -28,7 +27,7 @@ func _process(delta):
 # End the current level and start a new one. It may be the same level in the
 # case of a reset, or the next one if the player finishes the current one.
 func StartLevel():
-	$Level.queue_free()
+	self.get_child(0).free()
 	self.add_child(levels[levelNum].instance())
 	
 
