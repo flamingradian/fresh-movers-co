@@ -110,16 +110,17 @@ func _on_mouse_released():
 # Keep track of how many objects this box is colliding with.
 func _on_Area2D_area_entered(area):
 	if isInTruck and not levelManager.GetIsDrivingAway():
-		var shouldPlaySound = true
-		if isBroken:
-			shouldPlaySound = false
-		if area.get_parent() is RigidBody2D:
-			if not area.get_parent().isInTruck:
+		if not audioStreamPlayer.is_playing():
+			var shouldPlaySound = true
+			if isBroken:
 				shouldPlaySound = false
-		
-		if shouldPlaySound:
-			audioStreamPlayer.stream = thudSound
-			audioStreamPlayer.play()
+			if area.get_parent() is RigidBody2D:
+				if not area.get_parent().isInTruck:
+					shouldPlaySound = false
+			
+			if shouldPlaySound:
+				audioStreamPlayer.stream = thudSound
+				audioStreamPlayer.play()
 	else:
 		if startDetection:
 			collideCount += 1
