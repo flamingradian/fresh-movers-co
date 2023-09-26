@@ -28,7 +28,7 @@ func _process(delta):
 # End the current level and start a new one. It may be the same level in the
 # case of a reset, or the next one if the player finishes the current one.
 func StartLevel():
-	self.get_child(0).free()
+	$Level.queue_free()
 	self.add_child(levels[levelNum].instance())
 	
 
