@@ -38,6 +38,10 @@ func _process(delta):
 func set_default_texture():
 	$NinePatchRect.texture = load("res://Sprites/crate.png")
 
+# Helper to set the texture when this is in an invalid position.
+func set_invalid_texture():
+	$NinePatchRect.texture = load("res://Sprites/crate_invalid.png")
+
 # Helper to set the texture when this is selected.
 func set_selected_texture():
 	$NinePatchRect.texture = load("res://Sprites/crate_selected.png")
@@ -106,9 +110,15 @@ func _on_Area2D_area_entered(area):
 	if startDetection:
 		collideCount += 1
 
+		if collideCount > 1:
+			self.set_invalid_texture()
+
 func _on_Area2D_area_exited(area):
 	if startDetection:
 		collideCount -= 1
+
+		if collideCount > 1:
+			self.set_default_texture()
 
 # Keep track of when the box enters the truck.
 func _on_Truck_Area2D_area_entered(area):
