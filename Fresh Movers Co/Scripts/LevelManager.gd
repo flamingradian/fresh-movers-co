@@ -16,7 +16,7 @@ var levels = [
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
-	var restartButton = get_parent().get_child(1)
+	var restartButton = get_node("/root/Main/RestartButton")
 	restartButton.connect("pressed", self, "_on_RestartButton_pressed")
 	StartLevel()
 
