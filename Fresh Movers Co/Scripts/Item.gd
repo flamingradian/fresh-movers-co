@@ -118,9 +118,8 @@ func _on_Area2D_area_entered(area):
 				shouldPlaySound = false
 		
 		if shouldPlaySound:
-			#audioStreamPlayer.stream = thudSound
-			#audioStreamPlayer.play()
-			pass
+			audioStreamPlayer.stream = thudSound
+			audioStreamPlayer.play()
 	else:
 		if startDetection:
 			collideCount += 1
