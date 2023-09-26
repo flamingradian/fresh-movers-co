@@ -83,28 +83,27 @@ func _on_mouse_exited():
 		self.set_default_texture()
 
 func on_mouse_pressed():
-	if isSelected:
-		if isHoveringOverTruck == true:
-			# We only want the box to collide with one object,
-			# which is the inside of the truck.
-			if collideCount == 1:
-				isInTruck = true
-				isSelected = false
-				itemManager.SetIsItemSelected(false)
-				itemManager.AddItemToTruck()
+	if can_select_box() and isHovering:
+		isSelected = true
+		itemManager.SetIsItemSelected(true)
+		self.set_default_texture()
 
-				self.set_default_texture()
-				self.layers = 0x1
-				self.gravity_scale = 8
+func on_mouse_released():
+	if isSelected:
+		# We only want the box to collide with one object,
+		# which is the inside of the truck.
+		if isHoveringOverTruck == true and collideCount == 1:
+			isInTruck = true
+			isSelected = false
+			itemManager.SetIsItemSelected(false)
+			itemManager.AddItemToTruck()
+
+			self.set_default_texture()
+			self.layers = 0x1
+			self.gravity_scale = 8
 		else: # Deselect crate
 			isSelected = false
 			itemManager.SetIsItemSelected(false)
-			itemManager.SetDeselectOnly(true)
-	else:
-		if can_select_box() and isHovering:
-			isSelected = true
-			itemManager.SetIsItemSelected(true)
-			self.set_default_texture()
 
 func _input(event):
 	if event is InputEventMouseButton and event.button_index == BUTTON_LEFT:
@@ -112,7 +111,7 @@ func _input(event):
 			on_mouse_pressed()
 
 		if event.is_pressed() == false: # Mouse Release
-			itemManager.SetDeselectOnly(false)
+			on_mouse_released()
 
 # Keep track of how many objects this box is colliding with.
 func _on_Area2D_area_entered(area):
