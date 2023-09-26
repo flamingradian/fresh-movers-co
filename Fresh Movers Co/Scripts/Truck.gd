@@ -10,6 +10,8 @@ var velocity = Vector2(0, 0)
 # var a = 2
 # var b = "text"
 
+func _ready():
+	$StorageArea.modulate.a = storageAlpha
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):

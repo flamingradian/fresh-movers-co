@@ -37,7 +37,7 @@ func _process(delta):
 # End the current level and start a new one. It may be the same level in the
 # case of a reset, or the next one if the player finishes the current one.
 func StartLevel():
-	$Level.free()
+	self.remove_child($Level)
 	self.add_child(levels[levelNum].instance())
 	isLevelComplete = false
 	
@@ -48,3 +48,4 @@ func StartNextLevel():
 	
 func _on_RestartButton_pressed():
 	StartLevel()
+	
