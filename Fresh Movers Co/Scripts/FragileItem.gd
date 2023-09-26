@@ -16,7 +16,7 @@ func _ready():
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):
-	if isInTruck:
+	if isInTruck and not levelManager.GetIsDrivingAway():
 		var velChange = self.linear_velocity - pVelocity
 		var breakingForce = 300
 		if not isBroken:

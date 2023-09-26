@@ -2,6 +2,12 @@ extends Node
 
 
 var score = 0
+var isDrivingAway = false setget SetIsDrivingAway, GetIsDrivingAway
+func SetIsDrivingAway(new_value):
+	isDrivingAway = new_value
+func GetIsDrivingAway():
+	return isDrivingAway
+	
 var isLevelComplete setget , GetIsLevelComplete
 func GetIsLevelComplete():
 	return isLevelComplete
@@ -39,6 +45,7 @@ func StartLevel():
 	self.remove_child($Level)
 	self.add_child(levels[levelNum].instance())
 	isLevelComplete = false
+	isDrivingAway = false
 	
 
 func StartNextLevel():

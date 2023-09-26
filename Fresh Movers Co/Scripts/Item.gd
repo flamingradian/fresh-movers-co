@@ -109,7 +109,7 @@ func _on_mouse_released():
 
 # Keep track of how many objects this box is colliding with.
 func _on_Area2D_area_entered(area):
-	if isInTruck:
+	if isInTruck and not levelManager.GetIsDrivingAway():
 		var shouldPlaySound = true
 		if isBroken:
 			shouldPlaySound = false

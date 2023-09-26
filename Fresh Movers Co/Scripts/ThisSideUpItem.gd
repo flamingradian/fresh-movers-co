@@ -16,7 +16,7 @@ func _ready():
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):
-	if isInTruck:
+	if isInTruck and not levelManager.GetIsDrivingAway():
 		if not isBroken:
 			if abs(self.get_rotation_degrees() - startRotation) > 20:
 				isBroken = true
