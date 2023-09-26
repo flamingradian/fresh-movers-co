@@ -1,5 +1,6 @@
 extends Node
 
+onready var itemsList = self.get_children()
 var itemsInTruck = 0
 var scoreToAdd = 0
 func AddItemToTruck():
@@ -33,3 +34,8 @@ func _ready():
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 #func _process(delta):
 #	pass
+
+func DisableTruckItems():
+	for item in itemsList:
+		if item.isInTruck:
+			item.visible = false

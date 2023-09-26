@@ -2,6 +2,10 @@ extends Node
 
 
 var score = 0
+var isLevelComplete setget , GetIsLevelComplete
+func GetIsLevelComplete():
+	return isLevelComplete
+	
 var levelNum = 0
 
 var levels = [
@@ -22,13 +26,15 @@ func _ready():
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):
-	pass
+	if Input.is_action_just_pressed("ui_select"):
+		isLevelComplete = true
 
 # End the current level and start a new one. It may be the same level in the
 # case of a reset, or the next one if the player finishes the current one.
 func StartLevel():
-	self.get_child(0).free()
+	$Level.free()
 	self.add_child(levels[levelNum].instance())
+	isLevelComplete = false
 	
 
 func StartNextLevel():

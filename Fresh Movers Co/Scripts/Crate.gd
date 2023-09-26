@@ -13,27 +13,34 @@ var isSelected = false
 var isHoveringOverTruck = false
 var collideCount = 0
 
+onready var levelManager = get_node("/root/Main/LevelManager")
 onready var itemManager = self.get_parent()
-var truckStorageAreaPath = "/root/Main/LevelManager/Level/Truck/Storage Area"
+var truckStorageAreaPath = "/root/Main/LevelManager/Level/Truck/StorageArea"
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	self.layers = 0x2
-
+	
 	var truckStorageArea = get_node(truckStorageAreaPath)
 	truckStorageArea.connect("area_entered", self, "_on_Truck_Area2D_area_entered")
 	truckStorageArea.connect("area_exited", self, "_on_Truck_Area2D_area_exited")
 
 func _process(delta):
-	print(collideCount)
 	startDetection = true
+	
+	if Input.is_action_just_pressed("ui_select"):
+			isSelected = false
+	
 	if isSelected:
 		self.position = get_viewport().get_mouse_position()
 		self.z_index = 1
 	else:
-		self.z_index = 0
 		if isInTruck == false:
+			self.z_index = 0
 			self.transform = startTransform
+		else:
+			self.z_index = -2
+			
 
 # Helper to set the texture when this is unselected.
 func set_default_texture():
@@ -60,7 +67,8 @@ func edit_mode_exit():
 # GDScript seems to permit wrapping lines, so separate each statement to avoid
 # a line with more than 80 columns.
 func can_select_box():
-	return not itemManager.GetIsItemSelected() \
+	return not levelManager.GetIsLevelComplete() \
+	   and not itemManager.GetIsItemSelected() \
 	   and not itemManager.GetDeselectOnly() \
 	   and not isInTruck
 
