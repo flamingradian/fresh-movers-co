@@ -110,7 +110,7 @@ func _on_Area2D_area_entered(area):
 	if startDetection:
 		collideCount += 1
 
-		if collideCount > 1:
+		if isSelected and collideCount > 1:
 			self.set_invalid_texture()
 
 func _on_Area2D_area_exited(area):
