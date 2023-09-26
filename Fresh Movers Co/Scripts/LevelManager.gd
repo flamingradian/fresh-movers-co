@@ -10,6 +10,7 @@ var levelNum = 0
 
 var levels = [
 	preload("res://Scenes/TestLevel.tscn"),
+	preload("res://Scenes/TestLevel.tscn")
 ]
 
 # Declare member variables here. Examples:
@@ -27,7 +28,11 @@ func _ready():
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):
 	if Input.is_action_just_pressed("ui_select"):
-		isLevelComplete = true
+		if not isLevelComplete:
+			isLevelComplete = true
+		else:
+			if levelNum < levels.size() - 1:
+				StartNextLevel()
 
 # End the current level and start a new one. It may be the same level in the
 # case of a reset, or the next one if the player finishes the current one.
