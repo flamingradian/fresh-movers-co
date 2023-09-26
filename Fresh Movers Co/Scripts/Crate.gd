@@ -14,7 +14,7 @@ var isHoveringOverTruck = false
 var collideCount = 0
 
 onready var itemManager = self.get_parent()
-var truckStorageAreaPath = "/root/Level/Truck/Storage Area"
+var truckStorageAreaPath = "/root/LevelManager/Level/Truck/Storage Area"
 
 # Called when the node enters the scene tree for the first time.
 func _ready():

@@ -1,10 +1,11 @@
 extends Node
 
 var itemsInTruck = 0
+var scoreToAdd = 0
 func AddItemToTruck():
 	itemsInTruck += 1
-	if itemsInTruck == get_child_count():
-		print("Level Complete!")
+	scoreToAdd += 10
+	
 		
 
 var isItemSelected = false setget SetIsItemSelected, GetIsItemSelected

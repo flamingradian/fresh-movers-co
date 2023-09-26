@@ -14,10 +14,6 @@ config/name="Fresh Movers Co"
 run/main_scene="res://Scenes/Game.tscn"
 config/icon="res://icon.png"
 
-[autoload]
-
-GameManager="*res://Scripts/GameManager.gd"
-
 [display]
 
 window/size/width=1920
