@@ -1,7 +1,6 @@
 extends "res://Scripts/Item.gd"
 
 var pVelocity = Vector2(0, 0)
-var isBroken = false
 var restartTimer = 0
 var isRestartingLevel = false
 
@@ -23,8 +22,10 @@ func _process(delta):
 		if not isBroken:
 			if velChange.length() > breakingForce:
 				isBroken = true
+				audioStreamPlayer.stream = breakSound
+				audioStreamPlayer.play()
 		else:
-			if isBroken and isRestartingLevel == false:
+			if isRestartingLevel == false:
 				restartTimer += delta
 				if restartTimer > 1:
 					isRestartingLevel = true

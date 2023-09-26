@@ -11,10 +11,15 @@ var isInTruck = false
 var isSelected = false
 var isHoveringOverTruck = false
 var collideCount = 0
+var isBroken = false
 
 onready var levelManager = get_node("/root/Main/LevelManager")
 onready var itemManager = self.get_parent()
+onready var audioStreamPlayer = get_node("/root/Main/AudioStreamPlayer")
 var truckStorageAreaPath = "/root/Main/LevelManager/Level/Truck/StorageArea"
+
+var thudSound = preload("res://Sounds/Thud.wav")
+var breakSound = preload("res://Sounds/Break.wav")
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
@@ -104,11 +109,24 @@ func _on_mouse_released():
 
 # Keep track of how many objects this box is colliding with.
 func _on_Area2D_area_entered(area):
-	if startDetection:
-		collideCount += 1
+	if isInTruck:
+		var shouldPlaySound = true
+		if isBroken:
+			shouldPlaySound = false
+		if area.get_parent() is RigidBody2D:
+			if not area.get_parent().isInTruck:
+				shouldPlaySound = false
+		
+		if shouldPlaySound:
+			#audioStreamPlayer.stream = thudSound
+			#audioStreamPlayer.play()
+			pass
+	else:
+		if startDetection:
+			collideCount += 1
 
-		if isSelected and collideCount > 1:
-			self.set_invalid_texture()
+			if isSelected and collideCount > 1:
+				self.set_invalid_texture()
 
 func _on_Area2D_area_exited(area):
 	if startDetection:

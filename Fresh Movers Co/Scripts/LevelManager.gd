@@ -7,7 +7,6 @@ func GetIsLevelComplete():
 	return isLevelComplete
 	
 var levelNum = 0
-
 var levels = [
 	preload("res://Scenes/TestLevel.tscn"),
 	preload("res://Scenes/TestLevel.tscn")

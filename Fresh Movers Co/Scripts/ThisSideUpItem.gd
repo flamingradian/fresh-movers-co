@@ -1,7 +1,6 @@
 extends "res://Scripts/Item.gd"
 
 onready var startRotation = self.get_rotation_degrees()
-var isBroken = false
 var restartTimer = 0
 var isRestartingLevel = false
 
@@ -21,6 +20,8 @@ func _process(delta):
 		if not isBroken:
 			if abs(self.get_rotation_degrees() - startRotation) > 20:
 				isBroken = true
+				audioStreamPlayer.stream = breakSound
+				audioStreamPlayer.play()
 		else:
 			if isRestartingLevel == false:
 				restartTimer += delta
