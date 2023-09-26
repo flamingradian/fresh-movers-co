@@ -1,4 +1,4 @@
-extends Sprite
+extends Node2D
 
 onready var levelManager = get_node("/root/Main/LevelManager")
 onready var itemManager = get_node("/root/Main/LevelManager/Level/ItemManager")
