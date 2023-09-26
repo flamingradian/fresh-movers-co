@@ -117,7 +117,7 @@ func _on_Area2D_area_exited(area):
 	if startDetection:
 		collideCount -= 1
 
-		if collideCount > 1:
+		if collideCount <= 1:
 			self.set_default_texture()
 
 # Keep track of when the box enters the truck.
