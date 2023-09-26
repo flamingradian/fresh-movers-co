@@ -5,4 +5,4 @@
 [node name="LevelManager" type="Node"]
 script = ExtResource( 1 )
 
-[node name="StartScene" type="Node" parent="."]
+[node name="Level" type="Node" parent="."]
