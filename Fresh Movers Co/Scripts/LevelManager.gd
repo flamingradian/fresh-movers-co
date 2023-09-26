@@ -16,7 +16,7 @@ var levels = [
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
-	StartNextLevel()
+	StartLevel()
 
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
@@ -30,5 +30,5 @@ func StartLevel():
 	self.add_child(levels[levelNum].instance())
 
 func StartNextLevel():
-	StartLevel()
 	levelNum += 1
+	StartLevel()
