@@ -14,7 +14,7 @@ var isHoveringOverTruck = false
 var collideCount = 0
 
 onready var itemManager = self.get_parent()
-var truckStorageAreaPath = "/root/LevelManager/Level/Truck/Storage Area"
+var truckStorageAreaPath = "/root/Main/LevelManager/Level/Truck/Storage Area"
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
@@ -25,6 +25,7 @@ func _ready():
 	truckStorageArea.connect("area_exited", self, "_on_Truck_Area2D_area_exited")
 
 func _process(delta):
+	print(collideCount)
 	startDetection = true
 	if isSelected:
 		self.position = get_viewport().get_mouse_position()
