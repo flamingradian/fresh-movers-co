@@ -18,7 +18,7 @@ var velChange = Vector2(0, 0)
 
 onready var levelManager = get_node("/root/Main/LevelManager")
 onready var itemManager = self.get_parent()
-onready var audioStreamPlayer = get_node("/root/Main/AudioStreamPlayer")
+onready var soundEffectsPlayer = get_node("/root/Main/SoundEffectsPlayer")
 var truckStorageAreaPath = "/root/Main/LevelManager/Level/Truck/StorageArea"
 
 var thudSound = preload("res://Sounds/Thud.wav")
@@ -52,14 +52,14 @@ func _process(delta):
 			
 	
 	
-	if not audioStreamPlayer.is_playing() \
+	if not soundEffectsPlayer.is_playing() \
 	   and velChange.length() > 30 \
 	   and isInTruck \
 	   and not levelManager.GetIsDrivingAway() \
 	   and not isBroken:
-		audioStreamPlayer.stream = thudSound
-		audioStreamPlayer.set_volume_db((min(velChange.length()/4, 30) - 25))
-		audioStreamPlayer.play()
+		soundEffectsPlayer.stream = thudSound
+		soundEffectsPlayer.set_volume_db((min(velChange.length()/10, 30) - 55))
+		soundEffectsPlayer.play()
 	
 	pVel = self.linear_velocity
 			

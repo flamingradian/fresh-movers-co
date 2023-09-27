@@ -1,9 +1,10 @@
-[gd_scene load_steps=5 format=2]
+[gd_scene load_steps=6 format=2]
 
 [ext_resource path="res://Scripts/LevelManager.gd" type="Script" id=1]
 [ext_resource path="res://Sprites/RestartButton.png" type="Texture" id=2]
 [ext_resource path="res://Sprites/RestartButtonHovered.png" type="Texture" id=3]
 [ext_resource path="res://Sprites/RestartButtonPressed.png" type="Texture" id=4]
+[ext_resource path="res://Scripts/SoundTrackPlayer.gd" type="Script" id=5]
 
 [node name="Main" type="Node"]
 
@@ -21,4 +22,8 @@ texture_normal = ExtResource( 2 )
 texture_pressed = ExtResource( 4 )
 texture_hover = ExtResource( 3 )
 
-[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
+[node name="SoundEffectsPlayer" type="AudioStreamPlayer" parent="."]
+
+[node name="SoundTrackPlayer" type="AudioStreamPlayer" parent="."]
+bus = "SoundTrack"
+script = ExtResource( 5 )
