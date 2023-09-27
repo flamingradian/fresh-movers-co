@@ -1,0 +1,418 @@
+[gd_scene load_steps=16 format=2]
+
+[ext_resource path="res://Scripts/Truck.gd" type="Script" id=1]
+[ext_resource path="res://Scripts/NextLevelText.gd" type="Script" id=2]
+[ext_resource path="res://Sprites/truck.png" type="Texture" id=3]
+[ext_resource path="res://Sprites/TruckOuterWall.png" type="Texture" id=4]
+[ext_resource path="res://Sprites/background.png" type="Texture" id=5]
+[ext_resource path="res://Sprites/NextLevelText.png" type="Texture" id=6]
+[ext_resource path="res://Scripts/ItemManager.gd" type="Script" id=7]
+[ext_resource path="res://Sprites/Fragile.png" type="Texture" id=8]
+[ext_resource path="res://Sprites/crate.png" type="Texture" id=9]
+[ext_resource path="res://Scripts/FragileItem.gd" type="Script" id=10]
+
+[sub_resource type="RectangleShape2D" id=5]
+extents = Vector2( 440, 280 )
+
+[sub_resource type="RectangleShape2D" id=3]
+extents = Vector2( 440, 8 )
+
+[sub_resource type="RectangleShape2D" id=6]
+extents = Vector2( 4, 280 )
+
+[sub_resource type="PhysicsMaterial" id=1]
+
+[sub_resource type="RectangleShape2D" id=4]
+extents = Vector2( 92, 92 )
+
+[node name="Level" type="Node2D"]
+
+[node name="Viewport" type="Viewport" parent="."]
+size = Vector2( 1920, 1080 )
+
+[node name="Camera2D" type="Camera2D" parent="."]
+offset = Vector2( 960, 540 )
+
+[node name="Background" type="Sprite" parent="."]
+position = Vector2( 960, 540 )
+z_index = -10
+texture = ExtResource( 5 )
+
+[node name="NextLevelText" type="Sprite" parent="."]
+position = Vector2( 960, 360 )
+z_index = -3
+texture = ExtResource( 6 )
+script = ExtResource( 2 )
+
+[node name="Truck" type="Node2D" parent="."]
+position = Vector2( 960, 360 )
+script = ExtResource( 1 )
+
+[node name="StorageArea" type="Area2D" parent="Truck"]
+position = Vector2( 0, -44 )
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Truck/StorageArea"]
+shape = SubResource( 5 )
+
+[node name="StorageArea" type="Sprite" parent="Truck/StorageArea"]
+z_index = -1
+texture = ExtResource( 4 )
+
+[node name="Truck" type="Sprite" parent="Truck"]
+z_index = -2
+texture = ExtResource( 3 )
+
+[node name="Walls" type="StaticBody2D" parent="Truck"]
+position = Vector2( 0, -44 )
+
+[node name="CollisionShape2D2" type="CollisionShape2D" parent="Truck/Walls"]
+position = Vector2( 0, 284 )
+shape = SubResource( 3 )
+
+[node name="CollisionShape2D3" type="CollisionShape2D" parent="Truck/Walls"]
+position = Vector2( 0, -284 )
+shape = SubResource( 3 )
+
+[node name="CollisionShape2D4" type="CollisionShape2D" parent="Truck/Walls"]
+position = Vector2( -444, 0 )
+shape = SubResource( 6 )
+
+[node name="CollisionShape2D5" type="CollisionShape2D" parent="Truck/Walls"]
+position = Vector2( 444, 0 )
+shape = SubResource( 6 )
+
+[node name="Area2D" type="Area2D" parent="Truck/Walls"]
+
+[node name="CollisionShape2D2" type="CollisionShape2D" parent="Truck/Walls/Area2D"]
+position = Vector2( 0, 284 )
+shape = SubResource( 3 )
+
+[node name="CollisionShape2D3" type="CollisionShape2D" parent="Truck/Walls/Area2D"]
+position = Vector2( 0, -284 )
+shape = SubResource( 3 )
+
+[node name="CollisionShape2D4" type="CollisionShape2D" parent="Truck/Walls/Area2D"]
+position = Vector2( -444, 0 )
+shape = SubResource( 6 )
+
+[node name="CollisionShape2D5" type="CollisionShape2D" parent="Truck/Walls/Area2D"]
+position = Vector2( 444, 0 )
+shape = SubResource( 6 )
+
+[node name="ItemManager" type="Node" parent="."]
+script = ExtResource( 7 )
+
+[node name="FragileCrate" type="RigidBody2D" parent="ItemManager"]
+position = Vector2( 1500, 920 )
+rotation = 0.698132
+input_pickable = true
+physics_material_override = SubResource( 1 )
+gravity_scale = 0.0
+contacts_reported = 6
+script = ExtResource( 10 )
+
+[node name="NinePatchRect" type="NinePatchRect" parent="ItemManager/FragileCrate"]
+margin_left = -100.0
+margin_top = -100.0
+margin_right = 100.0
+margin_bottom = 100.0
+texture = ExtResource( 9 )
+patch_margin_left = 40
+patch_margin_top = 40
+patch_margin_right = 40
+patch_margin_bottom = 40
+axis_stretch_horizontal = 1
+axis_stretch_vertical = 1
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="ItemManager/FragileCrate"]
+shape = SubResource( 4 )
+
+[node name="Area2D" type="Area2D" parent="ItemManager/FragileCrate"]
+
+[node name="CollisionShape2D2" type="CollisionShape2D" parent="ItemManager/FragileCrate/Area2D"]
+shape = SubResource( 4 )
+
+[node name="TextureButton" type="TextureButton" parent="ItemManager/FragileCrate"]
+margin_left = -100.0
+margin_top = -100.0
+margin_right = 100.0
+margin_bottom = 100.0
+
+[node name="Fragile" type="Sprite" parent="ItemManager/FragileCrate"]
+texture = ExtResource( 8 )
+
+[node name="FragileCrate2" type="RigidBody2D" parent="ItemManager"]
+position = Vector2( 900, 920 )
+rotation = 0.698132
+input_pickable = true
+physics_material_override = SubResource( 1 )
+gravity_scale = 0.0
+contacts_reported = 6
+script = ExtResource( 10 )
+
+[node name="NinePatchRect" type="NinePatchRect" parent="ItemManager/FragileCrate2"]
+margin_left = -100.0
+margin_top = -100.0
+margin_right = 100.0
+margin_bottom = 100.0
+texture = ExtResource( 9 )
+patch_margin_left = 40
+patch_margin_top = 40
+patch_margin_right = 40
+patch_margin_bottom = 40
+axis_stretch_horizontal = 1
+axis_stretch_vertical = 1
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="ItemManager/FragileCrate2"]
+shape = SubResource( 4 )
+
+[node name="Area2D" type="Area2D" parent="ItemManager/FragileCrate2"]
+
+[node name="CollisionShape2D2" type="CollisionShape2D" parent="ItemManager/FragileCrate2/Area2D"]
+shape = SubResource( 4 )
+
+[node name="TextureButton" type="TextureButton" parent="ItemManager/FragileCrate2"]
+margin_left = -100.0
+margin_top = -100.0
+margin_right = 100.0
+margin_bottom = 100.0
+
+[node name="Fragile" type="Sprite" parent="ItemManager/FragileCrate2"]
+texture = ExtResource( 8 )
+
+[node name="FragileCrate3" type="RigidBody2D" parent="ItemManager"]
+position = Vector2( 340, 920 )
+rotation = 0.698132
+input_pickable = true
+physics_material_override = SubResource( 1 )
+gravity_scale = 0.0
+contacts_reported = 6
+script = ExtResource( 10 )
+
+[node name="NinePatchRect" type="NinePatchRect" parent="ItemManager/FragileCrate3"]
+margin_left = -100.0
+margin_top = -100.0
+margin_right = 100.0
+margin_bottom = 100.0
+texture = ExtResource( 9 )
+patch_margin_left = 40
+patch_margin_top = 40
+patch_margin_right = 40
+patch_margin_bottom = 40
+axis_stretch_horizontal = 1
+axis_stretch_vertical = 1
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="ItemManager/FragileCrate3"]
+shape = SubResource( 4 )
+
+[node name="Area2D" type="Area2D" parent="ItemManager/FragileCrate3"]
+
+[node name="CollisionShape2D2" type="CollisionShape2D" parent="ItemManager/FragileCrate3/Area2D"]
+shape = SubResource( 4 )
+
+[node name="TextureButton" type="TextureButton" parent="ItemManager/FragileCrate3"]
+margin_left = -100.0
+margin_top = -100.0
+margin_right = 100.0
+margin_bottom = 100.0
+
+[node name="Fragile" type="Sprite" parent="ItemManager/FragileCrate3"]
+texture = ExtResource( 8 )
+
+[node name="FragileCrate4" type="RigidBody2D" parent="ItemManager"]
+position = Vector2( 1260, 880 )
+rotation = -0.698132
+input_pickable = true
+physics_material_override = SubResource( 1 )
+gravity_scale = 0.0
+contacts_reported = 6
+script = ExtResource( 10 )
+
+[node name="NinePatchRect" type="NinePatchRect" parent="ItemManager/FragileCrate4"]
+margin_left = -100.0
+margin_top = -100.0
+margin_right = 100.0
+margin_bottom = 100.0
+texture = ExtResource( 9 )
+patch_margin_left = 40
+patch_margin_top = 40
+patch_margin_right = 40
+patch_margin_bottom = 40
+axis_stretch_horizontal = 1
+axis_stretch_vertical = 1
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="ItemManager/FragileCrate4"]
+shape = SubResource( 4 )
+
+[node name="Area2D" type="Area2D" parent="ItemManager/FragileCrate4"]
+
+[node name="CollisionShape2D2" type="CollisionShape2D" parent="ItemManager/FragileCrate4/Area2D"]
+shape = SubResource( 4 )
+
+[node name="TextureButton" type="TextureButton" parent="ItemManager/FragileCrate4"]
+margin_left = -100.0
+margin_top = -100.0
+margin_right = 100.0
+margin_bottom = 100.0
+
+[node name="Fragile" type="Sprite" parent="ItemManager/FragileCrate4"]
+texture = ExtResource( 8 )
+
+[node name="FragileCrate5" type="RigidBody2D" parent="ItemManager"]
+position = Vector2( 660, 880 )
+rotation = -0.698132
+input_pickable = true
+physics_material_override = SubResource( 1 )
+gravity_scale = 0.0
+contacts_reported = 6
+script = ExtResource( 10 )
+
+[node name="NinePatchRect" type="NinePatchRect" parent="ItemManager/FragileCrate5"]
+margin_left = -100.0
+margin_top = -100.0
+margin_right = 100.0
+margin_bottom = 100.0
+texture = ExtResource( 9 )
+patch_margin_left = 40
+patch_margin_top = 40
+patch_margin_right = 40
+patch_margin_bottom = 40
+axis_stretch_horizontal = 1
+axis_stretch_vertical = 1
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="ItemManager/FragileCrate5"]
+shape = SubResource( 4 )
+
+[node name="Area2D" type="Area2D" parent="ItemManager/FragileCrate5"]
+
+[node name="CollisionShape2D2" type="CollisionShape2D" parent="ItemManager/FragileCrate5/Area2D"]
+shape = SubResource( 4 )
+
+[node name="TextureButton" type="TextureButton" parent="ItemManager/FragileCrate5"]
+margin_left = -100.0
+margin_top = -100.0
+margin_right = 100.0
+margin_bottom = 100.0
+
+[node name="Fragile" type="Sprite" parent="ItemManager/FragileCrate5"]
+texture = ExtResource( 8 )
+
+[node name="FragileCrate6" type="RigidBody2D" parent="ItemManager"]
+position = Vector2( 1740, 880 )
+rotation = -0.698132
+input_pickable = true
+physics_material_override = SubResource( 1 )
+gravity_scale = 0.0
+contacts_reported = 6
+script = ExtResource( 10 )
+
+[node name="NinePatchRect" type="NinePatchRect" parent="ItemManager/FragileCrate6"]
+margin_left = -100.0
+margin_top = -100.0
+margin_right = 100.0
+margin_bottom = 100.0
+texture = ExtResource( 9 )
+patch_margin_left = 40
+patch_margin_top = 40
+patch_margin_right = 40
+patch_margin_bottom = 40
+axis_stretch_horizontal = 1
+axis_stretch_vertical = 1
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="ItemManager/FragileCrate6"]
+shape = SubResource( 4 )
+
+[node name="Area2D" type="Area2D" parent="ItemManager/FragileCrate6"]
+
+[node name="CollisionShape2D2" type="CollisionShape2D" parent="ItemManager/FragileCrate6/Area2D"]
+shape = SubResource( 4 )
+
+[node name="TextureButton" type="TextureButton" parent="ItemManager/FragileCrate6"]
+margin_left = -100.0
+margin_top = -100.0
+margin_right = 100.0
+margin_bottom = 100.0
+
+[node name="Fragile" type="Sprite" parent="ItemManager/FragileCrate6"]
+texture = ExtResource( 8 )
+
+[node name="FragileCrate7" type="RigidBody2D" parent="ItemManager"]
+position = Vector2( 100, 880 )
+input_pickable = true
+physics_material_override = SubResource( 1 )
+gravity_scale = 0.0
+contacts_reported = 6
+script = ExtResource( 10 )
+
+[node name="NinePatchRect" type="NinePatchRect" parent="ItemManager/FragileCrate7"]
+margin_left = -100.0
+margin_top = -100.0
+margin_right = 100.0
+margin_bottom = 100.0
+texture = ExtResource( 9 )
+patch_margin_left = 40
+patch_margin_top = 40
+patch_margin_right = 40
+patch_margin_bottom = 40
+axis_stretch_horizontal = 1
+axis_stretch_vertical = 1
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="ItemManager/FragileCrate7"]
+shape = SubResource( 4 )
+
+[node name="Area2D" type="Area2D" parent="ItemManager/FragileCrate7"]
+
+[node name="CollisionShape2D2" type="CollisionShape2D" parent="ItemManager/FragileCrate7/Area2D"]
+shape = SubResource( 4 )
+
+[node name="TextureButton" type="TextureButton" parent="ItemManager/FragileCrate7"]
+margin_left = -100.0
+margin_top = -100.0
+margin_right = 100.0
+margin_bottom = 100.0
+
+[node name="Fragile" type="Sprite" parent="ItemManager/FragileCrate7"]
+texture = ExtResource( 8 )
+
+[connection signal="area_entered" from="ItemManager/FragileCrate/Area2D" to="ItemManager/FragileCrate" method="_on_Area2D_area_entered"]
+[connection signal="area_exited" from="ItemManager/FragileCrate/Area2D" to="ItemManager/FragileCrate" method="_on_Area2D_area_exited"]
+[connection signal="button_down" from="ItemManager/FragileCrate/TextureButton" to="ItemManager/FragileCrate" method="_on_mouse_pressed"]
+[connection signal="button_up" from="ItemManager/FragileCrate/TextureButton" to="ItemManager/FragileCrate" method="_on_mouse_released"]
+[connection signal="mouse_entered" from="ItemManager/FragileCrate/TextureButton" to="ItemManager/FragileCrate" method="_on_mouse_entered"]
+[connection signal="mouse_exited" from="ItemManager/FragileCrate/TextureButton" to="ItemManager/FragileCrate" method="_on_mouse_exited"]
+[connection signal="area_entered" from="ItemManager/FragileCrate2/Area2D" to="ItemManager/FragileCrate2" method="_on_Area2D_area_entered"]
+[connection signal="area_exited" from="ItemManager/FragileCrate2/Area2D" to="ItemManager/FragileCrate2" method="_on_Area2D_area_exited"]
+[connection signal="button_down" from="ItemManager/FragileCrate2/TextureButton" to="ItemManager/FragileCrate2" method="_on_mouse_pressed"]
+[connection signal="button_up" from="ItemManager/FragileCrate2/TextureButton" to="ItemManager/FragileCrate2" method="_on_mouse_released"]
+[connection signal="mouse_entered" from="ItemManager/FragileCrate2/TextureButton" to="ItemManager/FragileCrate2" method="_on_mouse_entered"]
+[connection signal="mouse_exited" from="ItemManager/FragileCrate2/TextureButton" to="ItemManager/FragileCrate2" method="_on_mouse_exited"]
+[connection signal="area_entered" from="ItemManager/FragileCrate3/Area2D" to="ItemManager/FragileCrate3" method="_on_Area2D_area_entered"]
+[connection signal="area_exited" from="ItemManager/FragileCrate3/Area2D" to="ItemManager/FragileCrate3" method="_on_Area2D_area_exited"]
+[connection signal="button_down" from="ItemManager/FragileCrate3/TextureButton" to="ItemManager/FragileCrate3" method="_on_mouse_pressed"]
+[connection signal="button_up" from="ItemManager/FragileCrate3/TextureButton" to="ItemManager/FragileCrate3" method="_on_mouse_released"]
+[connection signal="mouse_entered" from="ItemManager/FragileCrate3/TextureButton" to="ItemManager/FragileCrate3" method="_on_mouse_entered"]
+[connection signal="mouse_exited" from="ItemManager/FragileCrate3/TextureButton" to="ItemManager/FragileCrate3" method="_on_mouse_exited"]
+[connection signal="area_entered" from="ItemManager/FragileCrate4/Area2D" to="ItemManager/FragileCrate4" method="_on_Area2D_area_entered"]
+[connection signal="area_exited" from="ItemManager/FragileCrate4/Area2D" to="ItemManager/FragileCrate4" method="_on_Area2D_area_exited"]
+[connection signal="button_down" from="ItemManager/FragileCrate4/TextureButton" to="ItemManager/FragileCrate4" method="_on_mouse_pressed"]
+[connection signal="button_up" from="ItemManager/FragileCrate4/TextureButton" to="ItemManager/FragileCrate4" method="_on_mouse_released"]
+[connection signal="mouse_entered" from="ItemManager/FragileCrate4/TextureButton" to="ItemManager/FragileCrate4" method="_on_mouse_entered"]
+[connection signal="mouse_exited" from="ItemManager/FragileCrate4/TextureButton" to="ItemManager/FragileCrate4" method="_on_mouse_exited"]
+[connection signal="area_entered" from="ItemManager/FragileCrate5/Area2D" to="ItemManager/FragileCrate5" method="_on_Area2D_area_entered"]
+[connection signal="area_exited" from="ItemManager/FragileCrate5/Area2D" to="ItemManager/FragileCrate5" method="_on_Area2D_area_exited"]
+[connection signal="button_down" from="ItemManager/FragileCrate5/TextureButton" to="ItemManager/FragileCrate5" method="_on_mouse_pressed"]
+[connection signal="button_up" from="ItemManager/FragileCrate5/TextureButton" to="ItemManager/FragileCrate5" method="_on_mouse_released"]
+[connection signal="mouse_entered" from="ItemManager/FragileCrate5/TextureButton" to="ItemManager/FragileCrate5" method="_on_mouse_entered"]
+[connection signal="mouse_exited" from="ItemManager/FragileCrate5/TextureButton" to="ItemManager/FragileCrate5" method="_on_mouse_exited"]
+[connection signal="area_entered" from="ItemManager/FragileCrate6/Area2D" to="ItemManager/FragileCrate6" method="_on_Area2D_area_entered"]
+[connection signal="area_exited" from="ItemManager/FragileCrate6/Area2D" to="ItemManager/FragileCrate6" method="_on_Area2D_area_exited"]
+[connection signal="button_down" from="ItemManager/FragileCrate6/TextureButton" to="ItemManager/FragileCrate6" method="_on_mouse_pressed"]
+[connection signal="button_up" from="ItemManager/FragileCrate6/TextureButton" to="ItemManager/FragileCrate6" method="_on_mouse_released"]
+[connection signal="mouse_entered" from="ItemManager/FragileCrate6/TextureButton" to="ItemManager/FragileCrate6" method="_on_mouse_entered"]
+[connection signal="mouse_exited" from="ItemManager/FragileCrate6/TextureButton" to="ItemManager/FragileCrate6" method="_on_mouse_exited"]
+[connection signal="area_entered" from="ItemManager/FragileCrate7/Area2D" to="ItemManager/FragileCrate7" method="_on_Area2D_area_entered"]
+[connection signal="area_exited" from="ItemManager/FragileCrate7/Area2D" to="ItemManager/FragileCrate7" method="_on_Area2D_area_exited"]
+[connection signal="button_down" from="ItemManager/FragileCrate7/TextureButton" to="ItemManager/FragileCrate7" method="_on_mouse_pressed"]
+[connection signal="button_up" from="ItemManager/FragileCrate7/TextureButton" to="ItemManager/FragileCrate7" method="_on_mouse_released"]
+[connection signal="mouse_entered" from="ItemManager/FragileCrate7/TextureButton" to="ItemManager/FragileCrate7" method="_on_mouse_entered"]
+[connection signal="mouse_exited" from="ItemManager/FragileCrate7/TextureButton" to="ItemManager/FragileCrate7" method="_on_mouse_exited"]

@@ -9,14 +9,14 @@ var isRestartingLevel = false
 
 
 # Called when the node enters the scene tree for the first time.
-func _ready():
-	pass # Replace with function body.
+#func _ready():
+#	pass # Replace with function body.
 
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):
 	if isInTruck and not levelManager.GetIsDrivingAway():
-		var breakingForce = 200
+		var breakingForce = 150
 		if not isBroken:
 			if velChange.length() > breakingForce:
 				isBroken = true

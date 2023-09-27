@@ -35,11 +35,19 @@ func GetIsLevelComplete():
 var levelNum = 0
 var levels = [
 	#preload("res://Scenes/Levels/Start.tscn"),
-	preload("res://Scenes/Levels/Level3.tscn"),
 	preload("res://Scenes/Levels/Level1.tscn"),
 	preload("res://Scenes/Levels/Level2.tscn"),
-	
+	preload("res://Scenes/Levels/Level3.tscn"),
+	preload("res://Scenes/Levels/Level4.tscn"),
+	preload("res://Scenes/Levels/Level5.tscn"),
 	preload("res://Scenes/Levels/Level6.tscn"),
+	preload("res://Scenes/Levels/Level7.tscn"),
+	preload("res://Scenes/Levels/Level8.tscn"),
+	preload("res://Scenes/Levels/Level9.tscn"),
+	
+	
+	
+	preload("res://Scenes/Levels/Level13.tscn"),
 ]
 
 # Declare member variables here. Examples:

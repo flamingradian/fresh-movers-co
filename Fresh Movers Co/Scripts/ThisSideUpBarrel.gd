@@ -10,15 +10,15 @@ var isRestartingLevel = false
 
 
 # Called when the node enters the scene tree for the first time.
-func _ready():
-	pass # Replace with function body.
+#func _ready():
+#	pass # Replace with function body.
 
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):
 	if isInTruck and not levelManager.GetIsDrivingAway():
 		if not isBroken:
-			if abs(self.get_rotation_degrees() - startRotation) > 20:
+			if abs(self.get_rotation_degrees() - startRotation) > 2:
 				isBroken = true
 				soundEffectsPlayer.stream = break1Sound
 				soundEffectsPlayer.set_volume_db(-15)
