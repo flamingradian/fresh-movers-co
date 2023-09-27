@@ -3,6 +3,7 @@
 [ext_resource path="res://Scripts/Barrel.gd" type="Script" id=1]
 
 [sub_resource type="PhysicsMaterial" id=1]
+friction = 0.5
 
 [sub_resource type="StreamTexture" id=4]
 load_path = "res://.import/barrel.png-cafc42a0abeee03afa3b91b6b7ae5d1e.stex"

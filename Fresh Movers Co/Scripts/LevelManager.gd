@@ -4,7 +4,6 @@ signal level_complete
 
 var soundTrackMuted = false
 var sfxMuted = false
-
 func _on_Music_Slider_value_changed(value):
 	AudioServer.set_bus_volume_db(AudioServer.get_bus_index("SoundTrack"), value)
 	if value < -19:
@@ -22,6 +21,12 @@ func _on_SFX_Slider_value_changed(value):
 		AudioServer.set_bus_mute(AudioServer.get_bus_index("SoundEffects"), false)
 
 var score = 0
+var scoreToAdd = 0 setget SetScoreToAdd
+onready var scoreText = get_node("/root/Main/ScoreText")
+func SetScoreToAdd(new_value):
+	scoreToAdd = new_value
+	scoreText.text = "Score: " + str(score) + " (+" + str(scoreToAdd) + ")"
+
 var isDrivingAway = false setget SetIsDrivingAway, GetIsDrivingAway
 func SetIsDrivingAway(new_value):
 	isDrivingAway = new_value
@@ -82,6 +87,8 @@ func StartLevel():
 	self.add_child(levels[levelNum].instance())
 	isLevelComplete = false
 	isDrivingAway = false
+	score += scoreToAdd
+	SetScoreToAdd(0) 
 	
 
 func StartNextLevel():

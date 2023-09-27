@@ -1,11 +1,12 @@
 extends Node
 
 onready var itemsList = self.get_children()
+onready var levelManager = get_node("/root/Main/LevelManager")
+
 var itemsInTruck = 0
-var scoreToAdd = 0
 func AddItemToTruck():
 	itemsInTruck += 1
-	scoreToAdd += 10
+	levelManager.SetScoreToAdd(max(0, 100 - 30 * (itemsList.size() - itemsInTruck)))
 	
 		
 
@@ -28,7 +29,9 @@ func GetDeselectOnly():
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
-	pass # Replace with function body.
+	for item in itemsList:
+		if item.isInTruck:
+			itemsInTruck += 1
 
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
