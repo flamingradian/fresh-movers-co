@@ -11,7 +11,10 @@ var isInTruck = false
 var isSelected = false
 var isHoveringOverTruck = false
 var collideCount = 0
+var collideSoundTimer = 0
 var isBroken = false
+var pVel = Vector2(0, 0)
+var velChange = Vector2(0, 0)
 
 onready var levelManager = get_node("/root/Main/LevelManager")
 onready var itemManager = self.get_parent()
@@ -31,6 +34,8 @@ func _ready():
 
 func _process(delta):
 	startDetection = true
+	collideSoundTimer += delta
+	velChange = self.linear_velocity - pVel
 	
 	if Input.is_action_just_pressed("ui_select"):
 			isSelected = false
@@ -44,6 +49,19 @@ func _process(delta):
 			self.transform = startTransform
 		else:
 			self.z_index = -2
+			
+	
+	
+	if not audioStreamPlayer.is_playing() \
+	   and velChange.length() > 30 \
+	   and isInTruck \
+	   and not levelManager.GetIsDrivingAway() \
+	   and isBroken:
+		audioStreamPlayer.stream = thudSound
+		audioStreamPlayer.set_volume_db((min(velChange.length()/4, 30) - 25))
+		audioStreamPlayer.play()
+	
+	pVel = self.linear_velocity
 			
 
 # Helper to set the texture when this is unselected.
@@ -109,24 +127,10 @@ func _on_mouse_released():
 
 # Keep track of how many objects this box is colliding with.
 func _on_Area2D_area_entered(area):
-	if isInTruck and not levelManager.GetIsDrivingAway():
-		if not audioStreamPlayer.is_playing():
-			var shouldPlaySound = true
-			if isBroken:
-				shouldPlaySound = false
-			if area.get_parent() is RigidBody2D:
-				if not area.get_parent().isInTruck:
-					shouldPlaySound = false
-			
-			if shouldPlaySound:
-				audioStreamPlayer.stream = thudSound
-				audioStreamPlayer.play()
-	else:
-		if startDetection:
-			collideCount += 1
-
-			if isSelected and collideCount > 1:
-				self.set_invalid_texture()
+	if startDetection:
+		collideCount += 1
+		if isSelected and collideCount > 1:
+			self.set_invalid_texture()
 
 func _on_Area2D_area_exited(area):
 	if startDetection:
