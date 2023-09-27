@@ -7,7 +7,7 @@ extends RigidBody2D
 var startDetection = false
 
 onready var startTransform = self.get_transform()
-var isInTruck = false
+export var isInTruck = false
 var isSelected = false
 var isHoveringOverTruck = false
 var collideCount = 0
@@ -27,7 +27,12 @@ var break2Sound = preload("res://Sounds/Break2.wav")
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
-	self.layers = 0x2
+	if isInTruck:
+		self.set_default_texture()
+		self.layers = 0x1
+		self.gravity_scale = 8
+	else:
+		self.layers = 0x2
 	
 	var truckStorageArea = get_node(truckStorageAreaPath)
 	truckStorageArea.connect("area_entered", self, "_on_Truck_Area2D_area_entered")

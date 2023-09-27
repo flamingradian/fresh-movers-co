@@ -16,18 +16,18 @@ func _ready():
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):
 	if isInTruck and not levelManager.GetIsDrivingAway():
-		var breakingForce = 300
+		var breakingForce = 200
 		if not isBroken:
 			if velChange.length() > breakingForce:
 				isBroken = true
 				soundEffectsPlayer.stream = break2Sound
 				soundEffectsPlayer.set_volume_db(-20)
 				soundEffectsPlayer.play()
-		else:
-			if isRestartingLevel == false:
-				restartTimer += delta
-				if restartTimer > 1:
-					isRestartingLevel = true
-					levelManager.StartLevel()
+	if isBroken:
+		if isRestartingLevel == false:
+			restartTimer += delta
+			if restartTimer > 1:
+				isRestartingLevel = true
+				levelManager.StartLevel()
 		
 

@@ -23,7 +23,7 @@ func _process(delta):
 	$StorageArea.modulate.a = storageAlpha
 
 	if isChangingAlpha:
-		storageAlpha += delta * 0.5
+		storageAlpha += delta * 0.4
 		if storageAlpha >= 1:
 			levelManager.SetIsDrivingAway(true)
 			isChangingAlpha = false

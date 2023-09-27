@@ -1,6 +1,6 @@
 [gd_scene load_steps=6 format=2]
 
-[ext_resource path="res://Scripts/FragileItem.gd" type="Script" id=1]
+[ext_resource path="res://Scripts/FragileBarrel.gd" type="Script" id=1]
 [ext_resource path="res://Sprites/crate.png" type="Texture" id=2]
 [ext_resource path="res://Sprites/Fragile.png" type="Texture" id=3]
 
@@ -9,7 +9,7 @@
 [sub_resource type="RectangleShape2D" id=4]
 extents = Vector2( 142, 142 )
 
-[node name="FragileItem" type="RigidBody2D"]
+[node name="FragileBarrel" type="RigidBody2D"]
 position = Vector2( 575, 920 )
 input_pickable = true
 physics_material_override = SubResource( 1 )

@@ -1,6 +1,5 @@
-extends "res://Scripts/Item.gd"
+extends "res://Scripts/Barrel.gd"
 
-onready var startRotation = self.get_rotation_degrees()
 var restartTimer = 0
 var isRestartingLevel = false
 
@@ -17,11 +16,12 @@ func _ready():
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):
 	if isInTruck and not levelManager.GetIsDrivingAway():
+		var breakingForce = 300
 		if not isBroken:
-			if abs(self.get_rotation_degrees() - startRotation) > 20:
+			if velChange.length() > breakingForce:
 				isBroken = true
-				soundEffectsPlayer.stream = break1Sound
-				soundEffectsPlayer.set_volume_db(-15)
+				soundEffectsPlayer.stream = break2Sound
+				soundEffectsPlayer.set_volume_db(-20)
 				soundEffectsPlayer.play()
 	if isBroken:
 		if isRestartingLevel == false:
@@ -29,3 +29,5 @@ func _process(delta):
 			if restartTimer > 1:
 				isRestartingLevel = true
 				levelManager.StartLevel()
+		
+

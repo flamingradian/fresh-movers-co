@@ -1,4 +1,4 @@
-extends "res://Scripts/Item.gd"
+extends "res://Scripts/Barrel.gd"
 
 onready var startRotation = self.get_rotation_degrees()
 var restartTimer = 0

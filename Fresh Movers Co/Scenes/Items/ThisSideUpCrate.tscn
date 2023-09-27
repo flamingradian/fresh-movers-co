@@ -1,29 +1,28 @@
-[gd_scene load_steps=5 format=2]
+[gd_scene load_steps=6 format=2]
 
-[ext_resource path="res://Scripts/Item.gd" type="Script" id=1]
+[ext_resource path="res://Sprites/crate.png" type="Texture" id=1]
+[ext_resource path="res://Sprites/ThisSideUp.png" type="Texture" id=2]
+[ext_resource path="res://Scripts/ThisSideUpItem.gd" type="Script" id=3]
 
 [sub_resource type="PhysicsMaterial" id=1]
-
-[sub_resource type="StreamTexture" id=5]
-load_path = "res://.import/crate.png-c387de9b883318ae36c9fd5a499c5602.stex"
 
 [sub_resource type="RectangleShape2D" id=4]
 extents = Vector2( 142, 142 )
 
-[node name="Item" type="RigidBody2D"]
+[node name="ThisSideUpCrate" type="RigidBody2D"]
 position = Vector2( 575, 920 )
 input_pickable = true
 physics_material_override = SubResource( 1 )
 gravity_scale = 0.0
 contacts_reported = 6
-script = ExtResource( 1 )
+script = ExtResource( 3 )
 
 [node name="NinePatchRect" type="NinePatchRect" parent="."]
 margin_left = -150.0
 margin_top = -150.0
 margin_right = 150.0
 margin_bottom = 150.0
-texture = SubResource( 5 )
+texture = ExtResource( 1 )
 patch_margin_left = 40
 patch_margin_top = 40
 patch_margin_right = 40
@@ -44,6 +43,15 @@ margin_left = -150.0
 margin_top = -150.0
 margin_right = 150.0
 margin_bottom = 150.0
+
+[node name="ThisSideUpLabel" type="TextureRect" parent="."]
+margin_left = -80.0
+margin_top = -24.0
+margin_right = 80.0
+margin_bottom = 24.0
+mouse_filter = 2
+texture = ExtResource( 2 )
+stretch_mode = 2
 
 [connection signal="area_entered" from="Area2D" to="." method="_on_Area2D_area_entered"]
 [connection signal="area_exited" from="Area2D" to="." method="_on_Area2D_area_exited"]

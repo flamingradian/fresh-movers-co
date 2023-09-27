@@ -10,7 +10,7 @@ load_path = "res://.import/crate.png-c387de9b883318ae36c9fd5a499c5602.stex"
 [sub_resource type="RectangleShape2D" id=4]
 extents = Vector2( 142, 142 )
 
-[node name="Item" type="RigidBody2D"]
+[node name="Crate" type="RigidBody2D"]
 position = Vector2( 575, 920 )
 input_pickable = true
 physics_material_override = SubResource( 1 )
