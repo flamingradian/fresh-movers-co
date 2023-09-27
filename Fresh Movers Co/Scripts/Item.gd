@@ -22,7 +22,8 @@ onready var soundEffectsPlayer = get_node("/root/Main/SoundEffectsPlayer")
 var truckStorageAreaPath = "/root/Main/LevelManager/Level/Truck/StorageArea"
 
 var thudSound = preload("res://Sounds/Thud.wav")
-var breakSound = preload("res://Sounds/Break.wav")
+var break1Sound = preload("res://Sounds/Break1.wav")
+var break2Sound = preload("res://Sounds/Break2.wav")
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
@@ -58,7 +59,7 @@ func _process(delta):
 	   and not levelManager.GetIsDrivingAway() \
 	   and not isBroken:
 		soundEffectsPlayer.stream = thudSound
-		soundEffectsPlayer.set_volume_db((min(velChange.length()/10, 30) - 65))
+		soundEffectsPlayer.set_volume_db((min(velChange.length()/10, 30) - 40))
 		soundEffectsPlayer.play()
 	
 	pVel = self.linear_velocity

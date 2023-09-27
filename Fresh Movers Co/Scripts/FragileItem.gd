@@ -20,8 +20,8 @@ func _process(delta):
 		if not isBroken:
 			if velChange.length() > breakingForce:
 				isBroken = true
-				soundEffectsPlayer.stream = breakSound
-				soundEffectsPlayer.set_volume_db(-25)
+				soundEffectsPlayer.stream = break2Sound
+				soundEffectsPlayer.set_volume_db(-20)
 				soundEffectsPlayer.play()
 		else:
 			if isRestartingLevel == false:

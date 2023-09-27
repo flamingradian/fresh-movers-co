@@ -20,12 +20,12 @@ func _process(delta):
 		if not isBroken:
 			if abs(self.get_rotation_degrees() - startRotation) > 20:
 				isBroken = true
-				soundEffectsPlayer.stream = breakSound
-				soundEffectsPlayer.set_volume_db(-25)
+				soundEffectsPlayer.stream = break1Sound
+				soundEffectsPlayer.set_volume_db(-15)
 				soundEffectsPlayer.play()
 		else:
 			if isRestartingLevel == false:
 				restartTimer += delta
-				if restartTimer > 1:
+				if restartTimer > 1.5:
 					isRestartingLevel = true
 					levelManager.StartLevel()
