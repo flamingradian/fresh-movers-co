@@ -2,13 +2,24 @@ extends Node
 
 signal level_complete
 
-var musicVolume = -25
-func _on_Music_Slider_value_changed(value):
-	musicVolume = value
+var soundTrackMuted = false
+var sfxMuted = false
 
-var sfxVolume = -55
+func _on_Music_Slider_value_changed(value):
+	AudioServer.set_bus_volume_db(AudioServer.get_bus_index("SoundTrack"), value)
+	if value == -20:
+		AudioServer.set_bus_mute(AudioServer.get_bus_index("SoundTrack"), true)   
+		soundTrackMuted = true
+	elif soundTrackMuted:
+		AudioServer.set_bus_mute(AudioServer.get_bus_index("SoundTrack"), false)
+
 func _on_SFX_Slider_value_changed(value):
-	sfxVolume = value
+	AudioServer.set_bus_volume_db(AudioServer.get_bus_index("SoundEffects"), value)
+	if value == -20:
+		AudioServer.set_bus_mute(AudioServer.get_bus_index("SoundEffects"), true)   
+		sfxMuted = true
+	elif sfxMuted:
+		AudioServer.set_bus_mute(AudioServer.get_bus_index("SoundEffects"), false)
 
 var score = 0
 var isDrivingAway = false setget SetIsDrivingAway, GetIsDrivingAway

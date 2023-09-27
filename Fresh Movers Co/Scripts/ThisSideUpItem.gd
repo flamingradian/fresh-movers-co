@@ -21,7 +21,7 @@ func _process(delta):
 			if abs(self.get_rotation_degrees() - startRotation) > 20:
 				isBroken = true
 				soundEffectsPlayer.stream = breakSound
-				soundEffectsPlayer.set_volume_db(45 + levelManager.sfxVolume)
+				soundEffectsPlayer.set_volume_db(-25)
 				soundEffectsPlayer.play()
 		else:
 			if isRestartingLevel == false:
