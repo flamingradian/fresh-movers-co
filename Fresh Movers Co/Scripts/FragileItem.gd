@@ -1,6 +1,5 @@
 extends "res://Scripts/Item.gd"
 
-var pVelocity = Vector2(0, 0)
 var restartTimer = 0
 var isRestartingLevel = false
 
@@ -17,7 +16,6 @@ func _ready():
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):
 	if isInTruck and not levelManager.GetIsDrivingAway():
-		var velChange = self.linear_velocity - pVelocity
 		var breakingForce = 300
 		if not isBroken:
 			if velChange.length() > breakingForce:
@@ -31,5 +29,4 @@ func _process(delta):
 					isRestartingLevel = true
 					levelManager.StartLevel()
 		
-		pVelocity = self.linear_velocity
 
