@@ -2,6 +2,14 @@ extends Node
 
 signal level_complete
 
+var musicVolume = -25
+func _on_Music_Slider_value_changed(value):
+	musicVolume = value
+
+var sfxVolume = -55
+func _on_SFX_Slider_value_changed(value):
+	sfxVolume = value
+
 var score = 0
 var isDrivingAway = false setget SetIsDrivingAway, GetIsDrivingAway
 func SetIsDrivingAway(new_value):
@@ -62,3 +70,6 @@ func _on_RestartButton_pressed():
 
 func _on_advance_button_pressed():
 	advance()
+
+
+

@@ -1,4 +1,4 @@
-[gd_scene load_steps=8 format=2]
+[gd_scene load_steps=12 format=2]
 
 [ext_resource path="res://Scripts/LevelManager.gd" type="Script" id=1]
 [ext_resource path="res://Sprites/RestartButton.png" type="Texture" id=2]
@@ -7,6 +7,18 @@
 [ext_resource path="res://Sprites/advance_button.png" type="Texture" id=5]
 [ext_resource path="res://Sprites/advance_button_pressed.png" type="Texture" id=6]
 [ext_resource path="res://Scripts/SoundTrackPlayer.gd" type="Script" id=7]
+[ext_resource path="res://PixelFont.otf" type="DynamicFontData" id=8]
+
+[sub_resource type="StyleBoxLine" id=1]
+color = Color( 1, 0, 1, 1 )
+thickness = 8
+
+[sub_resource type="DynamicFont" id=2]
+font_data = ExtResource( 8 )
+
+[sub_resource type="StyleBoxLine" id=3]
+color = Color( 1, 1, 0, 1 )
+thickness = 8
 
 [node name="Main" type="Node"]
 
@@ -24,16 +36,58 @@ texture_normal = ExtResource( 2 )
 texture_pressed = ExtResource( 4 )
 texture_hover = ExtResource( 3 )
 
-[node name="SoundEffectsPlayer" type="AudioStreamPlayer" parent="."]
-
-[node name="SoundTrackPlayer" type="AudioStreamPlayer" parent="."]
-bus = "SoundTrack"
-script = ExtResource( 7 )
-
 [node name="AdvanceButton" type="TouchScreenButton" parent="."]
 position = Vector2( 1740, 192 )
 normal = ExtResource( 5 )
 pressed = ExtResource( 6 )
 visibility_mode = 1
 
+[node name="SoundEffectsPlayer" type="AudioStreamPlayer" parent="."]
+
+[node name="SoundTrackPlayer" type="AudioStreamPlayer" parent="."]
+bus = "SoundTrack"
+script = ExtResource( 7 )
+
+[node name="Music Slider" type="HSlider" parent="."]
+margin_left = 1560.0
+margin_top = 80.0
+margin_right = 1710.0
+margin_bottom = 112.0
+custom_styles/slider = SubResource( 1 )
+min_value = -45.0
+max_value = -5.0
+value = -25.0
+
+[node name="Music Label" type="RichTextLabel" parent="."]
+margin_left = 1600.0
+margin_top = 56.0
+margin_right = 1680.0
+margin_bottom = 96.0
+rect_scale = Vector2( 2, 2 )
+custom_colors/default_color = Color( 1, 0, 1, 1 )
+custom_fonts/normal_font = SubResource( 2 )
+text = "Music"
+
+[node name="SFX Slider" type="HSlider" parent="."]
+margin_left = 1560.0
+margin_top = 144.0
+margin_right = 1710.0
+margin_bottom = 176.0
+custom_styles/slider = SubResource( 3 )
+min_value = -75.0
+max_value = -35.0
+value = -55.0
+
+[node name="SFX Label" type="RichTextLabel" parent="."]
+margin_left = 1608.0
+margin_top = 120.0
+margin_right = 1688.0
+margin_bottom = 160.0
+rect_scale = Vector2( 2, 2 )
+custom_colors/default_color = Color( 1, 1, 0, 1 )
+custom_fonts/normal_font = SubResource( 2 )
+text = "SFX"
+
 [connection signal="pressed" from="AdvanceButton" to="LevelManager" method="_on_advance_button_pressed"]
+[connection signal="value_changed" from="Music Slider" to="LevelManager" method="_on_Music_Slider_value_changed"]
+[connection signal="value_changed" from="SFX Slider" to="LevelManager" method="_on_SFX_Slider_value_changed"]

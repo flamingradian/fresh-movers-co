@@ -21,7 +21,7 @@ func _process(delta):
 			if velChange.length() > breakingForce:
 				isBroken = true
 				soundEffectsPlayer.stream = breakSound
-				soundEffectsPlayer.set_volume_db(-10)
+				soundEffectsPlayer.set_volume_db(45 + levelManager.sfxVolume)
 				soundEffectsPlayer.play()
 		else:
 			if isRestartingLevel == false:
