@@ -1,5 +1,6 @@
 extends Node
 
+signal level_complete
 
 var score = 0
 var isDrivingAway = false setget SetIsDrivingAway, GetIsDrivingAway
@@ -33,11 +34,15 @@ func _ready():
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):
 	if Input.is_action_just_pressed("ui_select"):
-		if not isLevelComplete:
-			isLevelComplete = true
-		else:
-			if levelNum < levels.size() - 1:
-				StartNextLevel()
+		advance()
+
+func advance():
+	if not isLevelComplete:
+		isLevelComplete = true
+		emit_signal("level_complete")
+	else:
+		if levelNum < levels.size() - 1:
+			StartNextLevel()
 
 # End the current level and start a new one. It may be the same level in the
 # case of a reset, or the next one if the player finishes the current one.
@@ -54,4 +59,6 @@ func StartNextLevel():
 	
 func _on_RestartButton_pressed():
 	StartLevel()
-	
+
+func _on_advance_button_pressed():
+	advance()
