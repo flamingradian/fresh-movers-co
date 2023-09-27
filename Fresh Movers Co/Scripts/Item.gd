@@ -58,7 +58,7 @@ func _process(delta):
 	   and not levelManager.GetIsDrivingAway() \
 	   and not isBroken:
 		soundEffectsPlayer.stream = thudSound
-		soundEffectsPlayer.set_volume_db((min(velChange.length()/10, 30) - 55))
+		soundEffectsPlayer.set_volume_db((min(velChange.length()/10, 30) - 65))
 		soundEffectsPlayer.play()
 	
 	pVel = self.linear_velocity
