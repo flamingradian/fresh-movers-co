@@ -56,7 +56,7 @@ func _process(delta):
 	   and velChange.length() > 30 \
 	   and isInTruck \
 	   and not levelManager.GetIsDrivingAway() \
-	   and isBroken:
+	   and not isBroken:
 		audioStreamPlayer.stream = thudSound
 		audioStreamPlayer.set_volume_db((min(velChange.length()/4, 30) - 25))
 		audioStreamPlayer.play()
