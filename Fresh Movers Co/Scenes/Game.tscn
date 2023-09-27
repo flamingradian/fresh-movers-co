@@ -1,4 +1,4 @@
-[gd_scene load_steps=12 format=2]
+[gd_scene load_steps=13 format=2]
 
 [ext_resource path="res://Scripts/LevelManager.gd" type="Script" id=1]
 [ext_resource path="res://Sprites/RestartButton.png" type="Texture" id=2]
@@ -8,17 +8,14 @@
 [ext_resource path="res://Sprites/advance_button_pressed.png" type="Texture" id=6]
 [ext_resource path="res://Scripts/SoundTrackPlayer.gd" type="Script" id=7]
 [ext_resource path="res://PixelFont.otf" type="DynamicFontData" id=8]
-
-[sub_resource type="StyleBoxLine" id=1]
-color = Color( 1, 0, 1, 1 )
-thickness = 8
+[ext_resource path="res://Scripts/Music Slider.gd" type="Script" id=9]
+[ext_resource path="res://Scripts/SFX Slider.gd" type="Script" id=10]
 
 [sub_resource type="DynamicFont" id=2]
 font_data = ExtResource( 8 )
 
-[sub_resource type="StyleBoxLine" id=3]
-color = Color( 1, 1, 0, 1 )
-thickness = 8
+[sub_resource type="RectangleShape2D" id=4]
+extents = Vector2( 80, 10 )
 
 [node name="Main" type="Node"]
 
@@ -49,45 +46,76 @@ bus = "SoundEffects"
 bus = "SoundTrack"
 script = ExtResource( 7 )
 
-[node name="Music Slider" type="HSlider" parent="."]
-margin_left = 1560.0
-margin_top = 80.0
-margin_right = 1710.0
-margin_bottom = 112.0
-custom_styles/slider = SubResource( 1 )
-min_value = -20.0
-max_value = 20.0
+[node name="Music Slider" type="Node2D" parent="."]
+position = Vector2( 1560, 88 )
+script = ExtResource( 9 )
 
-[node name="Music Label" type="RichTextLabel" parent="."]
-margin_left = 1600.0
-margin_top = 56.0
-margin_right = 1680.0
-margin_bottom = 96.0
+[node name="Music Label" type="RichTextLabel" parent="Music Slider"]
+margin_left = 40.0
+margin_top = -32.0
+margin_right = 120.0
+margin_bottom = 8.0
 rect_scale = Vector2( 2, 2 )
+mouse_filter = 2
 custom_colors/default_color = Color( 1, 0, 1, 1 )
 custom_fonts/normal_font = SubResource( 2 )
 text = "Music"
 
-[node name="SFX Slider" type="HSlider" parent="."]
-margin_left = 1560.0
-margin_top = 144.0
-margin_right = 1710.0
-margin_bottom = 176.0
-custom_styles/slider = SubResource( 3 )
-min_value = -20.0
-max_value = 20.0
+[node name="Border" type="ColorRect" parent="Music Slider"]
+margin_top = -2.0
+margin_right = 150.0
+margin_bottom = 10.0
+mouse_filter = 2
+color = Color( 0.392157, 0, 0.392157, 1 )
 
-[node name="SFX Label" type="RichTextLabel" parent="."]
-margin_left = 1608.0
-margin_top = 120.0
-margin_right = 1688.0
-margin_bottom = 160.0
+[node name="Fill" type="ColorRect" parent="Music Slider"]
+margin_right = 150.0
+margin_bottom = 8.0
+mouse_filter = 2
+color = Color( 1, 0, 1, 1 )
+
+[node name="Area2D" type="Area2D" parent="Music Slider"]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Music Slider/Area2D"]
+position = Vector2( 75, 4 )
+shape = SubResource( 4 )
+
+[node name="SFX Slider" type="Node2D" parent="."]
+position = Vector2( 1560, 168 )
+script = ExtResource( 10 )
+
+[node name="SFX Label" type="RichTextLabel" parent="SFX Slider"]
+margin_left = 48.0
+margin_top = -32.0
+margin_right = 128.0
+margin_bottom = 8.0
 rect_scale = Vector2( 2, 2 )
+mouse_filter = 2
 custom_colors/default_color = Color( 1, 1, 0, 1 )
 custom_fonts/normal_font = SubResource( 2 )
 text = "SFX"
 
+[node name="Border" type="ColorRect" parent="SFX Slider"]
+margin_top = -2.0
+margin_right = 150.0
+margin_bottom = 10.0
+mouse_filter = 2
+color = Color( 0.392157, 0.392157, 0, 1 )
+
+[node name="Fill" type="ColorRect" parent="SFX Slider"]
+margin_right = 150.0
+margin_bottom = 8.0
+mouse_filter = 2
+color = Color( 1, 1, 0, 1 )
+
+[node name="Area2D" type="Area2D" parent="SFX Slider"]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="SFX Slider/Area2D"]
+position = Vector2( 75, 4 )
+shape = SubResource( 4 )
+
 [connection signal="pressed" from="AdvanceButton" to="LevelManager" method="_on_advance_button_pressed"]
-[connection signal="value_changed" from="Music Slider" to="LevelManager" method="_on_Music_Slider_value_changed"]
-[connection signal="value_changed" from="Music Slider" to="SoundTrackPlayer" method="_on_Music_Slider_value_changed"]
-[connection signal="value_changed" from="SFX Slider" to="LevelManager" method="_on_SFX_Slider_value_changed"]
+[connection signal="mouse_entered" from="Music Slider/Area2D" to="Music Slider" method="_on_Area2D_mouse_entered"]
+[connection signal="mouse_exited" from="Music Slider/Area2D" to="Music Slider" method="_on_Area2D_mouse_exited"]
+[connection signal="mouse_entered" from="SFX Slider/Area2D" to="SFX Slider" method="_on_Area2D_mouse_entered"]
+[connection signal="mouse_exited" from="SFX Slider/Area2D" to="SFX Slider" method="_on_Area2D_mouse_exited"]
