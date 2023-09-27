@@ -87,12 +87,12 @@ func StartLevel():
 	self.add_child(levels[levelNum].instance())
 	isLevelComplete = false
 	isDrivingAway = false
-	score += scoreToAdd
 	SetScoreToAdd(0) 
 	
 
 func StartNextLevel():
 	levelNum += 1
+	score += scoreToAdd
 	SceneTransition.TransitionWhite()
 	
 func _on_RestartButton_pressed():
