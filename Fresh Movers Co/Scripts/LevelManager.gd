@@ -60,7 +60,7 @@ func advance():
 		isLevelComplete = true
 		emit_signal("level_complete")
 	else:
-		if levelNum < levels.size() - 1:
+		if levelNum < levels.size() - 1 and isDrivingAway:
 			StartNextLevel()
 
 # End the current level and start a new one. It may be the same level in the
@@ -74,10 +74,10 @@ func StartLevel():
 
 func StartNextLevel():
 	levelNum += 1
-	StartLevel()
+	SceneTransition.TransitionWhite()
 	
 func _on_RestartButton_pressed():
-	StartLevel()
+	SceneTransition.TransitionBlack()
 
 func _on_advance_button_pressed():
 	advance()
