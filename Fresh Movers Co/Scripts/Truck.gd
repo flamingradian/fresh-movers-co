@@ -9,15 +9,19 @@ var velocity = Vector2(0, 0)
 # var a = 2
 # var b = "text"
 
+# This is the handler for completing the level and starts the animation where
+# the truck closes and drives away.
+func _on_level_complete():
+	isChangingAlpha = true
+
 func _ready():
 	$StorageArea.modulate.a = storageAlpha
+	levelManager.connect("level_complete", self, "_on_level_complete")
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):
 	$StorageArea.modulate.a = storageAlpha
-	if Input.is_action_just_pressed("ui_select"):
-		isChangingAlpha = true
-	
+
 	if isChangingAlpha:
 		storageAlpha += delta * 0.5
 		if storageAlpha >= 1:
