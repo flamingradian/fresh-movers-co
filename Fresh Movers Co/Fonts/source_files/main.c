@@ -1,3 +1,11 @@
+// SPDX-License-Identifier: (MIT or OFL-1.1)
+/*
+ * Inefficient pixelated font generator. It is not recommended to use this to
+ * generate fonts for high-performing applications.
+ *
+ * Copyright (c) 2023, Richard Acayan.
+ */
+
 #include <fcntl.h>
 #include <stdio.h>
 #include <stdlib.h>
