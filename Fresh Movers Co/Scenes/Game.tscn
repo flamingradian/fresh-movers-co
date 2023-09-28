@@ -54,15 +54,18 @@ position = Vector2( 1560, 88 )
 script = ExtResource( 9 )
 
 [node name="Music Label" type="RichTextLabel" parent="MusicSlider"]
-margin_left = 40.0
+margin_left = 28.0
 margin_top = -32.0
-margin_right = 120.0
+margin_right = 108.0
 margin_bottom = 8.0
 rect_scale = Vector2( 2, 2 )
 mouse_filter = 2
 custom_fonts/normal_font = SubResource( 1 )
 custom_colors/default_color = Color( 1, 0, 1, 1 )
 text = "Music"
+__meta__ = {
+"_edit_use_anchors_": false
+}
 
 [node name="Border" type="ColorRect" parent="MusicSlider"]
 margin_top = -2.0
@@ -76,6 +79,9 @@ margin_right = 150.0
 margin_bottom = 8.0
 mouse_filter = 2
 color = Color( 1, 0, 1, 1 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
 
 [node name="Area2D" type="Area2D" parent="MusicSlider"]
 
@@ -88,15 +94,18 @@ position = Vector2( 1560, 168 )
 script = ExtResource( 10 )
 
 [node name="SFX Label" type="RichTextLabel" parent="SFXSlider"]
-margin_left = 48.0
+margin_left = 44.0
 margin_top = -32.0
-margin_right = 128.0
+margin_right = 124.0
 margin_bottom = 8.0
 rect_scale = Vector2( 2, 2 )
 mouse_filter = 2
 custom_fonts/normal_font = SubResource( 1 )
 custom_colors/default_color = Color( 1, 1, 0, 1 )
 text = "SFX"
+__meta__ = {
+"_edit_use_anchors_": false
+}
 
 [node name="Border" type="ColorRect" parent="SFXSlider"]
 margin_top = -2.0
@@ -110,6 +119,9 @@ margin_right = 150.0
 margin_bottom = 8.0
 mouse_filter = 2
 color = Color( 1, 1, 0, 1 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
 
 [node name="Area2D" type="Area2D" parent="SFXSlider"]
 
