@@ -75,7 +75,7 @@ var storyTextList = [
 	"It was tough trying to balance everything out.",
 	"Please keep these boxes right side up.",
 	"I'm planning to move closer to my family. I want to visit often.",
-	"When I face an issue, I try to shake things up. Find some new perspectives.",
+	"I haven't thought about how to arrange the furniture yet.",
 	"We gave it some good thought. In the end, we decided to start fresh.",
 ]
 
