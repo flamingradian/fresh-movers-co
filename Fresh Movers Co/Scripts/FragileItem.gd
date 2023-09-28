@@ -16,7 +16,7 @@ var isRestartingLevel = false
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):
 	if isInTruck and not levelManager.GetIsDrivingAway():
-		var breakingForce = 150
+		var breakingForce = 175
 		if not isBroken:
 			if velChange.length() > breakingForce:
 				isBroken = true

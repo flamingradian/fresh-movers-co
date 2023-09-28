@@ -37,7 +37,7 @@ var isLevelComplete setget , GetIsLevelComplete
 func GetIsLevelComplete():
 	return isLevelComplete
 	
-var levelNum = 0
+var levelNum = 11
 var levels = [
 	#preload("res://Scenes/Levels/Start.tscn"),
 	preload("res://Scenes/Levels/Level1.tscn"),
@@ -49,9 +49,9 @@ var levels = [
 	preload("res://Scenes/Levels/Level7.tscn"),
 	preload("res://Scenes/Levels/Level8.tscn"),
 	preload("res://Scenes/Levels/Level9.tscn"),
-	
-	
-	
+	preload("res://Scenes/Levels/Level10.tscn"),
+	preload("res://Scenes/Levels/Level11.tscn"),
+	preload("res://Scenes/Levels/Level12.tscn"),
 	preload("res://Scenes/Levels/Level13.tscn"),
 ]
 

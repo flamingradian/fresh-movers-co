@@ -18,7 +18,7 @@ var isRestartingLevel = false
 func _process(delta):
 	if isInTruck and not levelManager.GetIsDrivingAway():
 		if not isBroken:
-			if abs(self.get_rotation_degrees() - startRotation) > 2:
+			if abs(self.get_rotation_degrees() - startRotation) > 3:
 				isBroken = true
 				soundEffectsPlayer.stream = break1Sound
 				soundEffectsPlayer.set_volume_db(-15)
