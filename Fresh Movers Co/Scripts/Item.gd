@@ -141,15 +141,16 @@ func _on_Area2D_area_entered(area):
 func _on_Area2D_area_exited(area):
 	if startDetection:
 		collideCount -= 1
-
 		if collideCount <= 1:
 			self.set_default_texture()
 
 # Keep track of when the box enters the truck.
 func _on_Truck_Area2D_area_entered(area):
-	if startDetection:
+	if startDetection and area.get_parent().name == self.name:
 		isHoveringOverTruck = true
+		print("Truck")
 
 func _on_Truck_Area2D_area_exited(area):
-	if startDetection:
+	if startDetection and area.get_parent().name == self.name:
 		isHoveringOverTruck = false
+		print("Truck Exit")

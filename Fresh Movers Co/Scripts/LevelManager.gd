@@ -37,7 +37,7 @@ var isLevelComplete setget , GetIsLevelComplete
 func GetIsLevelComplete():
 	return isLevelComplete
 	
-var levelNum = 11
+var levelNum = 0
 var levels = [
 	#preload("res://Scenes/Levels/Start.tscn"),
 	preload("res://Scenes/Levels/Level1.tscn"),
@@ -53,6 +53,8 @@ var levels = [
 	preload("res://Scenes/Levels/Level11.tscn"),
 	preload("res://Scenes/Levels/Level12.tscn"),
 	preload("res://Scenes/Levels/Level13.tscn"),
+	preload("res://Scenes/Levels/Level14.tscn"),
+	preload("res://Scenes/Levels/Level15.tscn"),
 ]
 
 # Declare member variables here. Examples:

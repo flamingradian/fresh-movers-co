@@ -10,7 +10,6 @@
 [ext_resource path="res://Scripts/FragileBarrel.gd" type="Script" id=8]
 [ext_resource path="res://Scripts/ItemManager.gd" type="Script" id=9]
 [ext_resource path="res://Scripts/Item.gd" type="Script" id=10]
-[ext_resource path="res://Sprites/crate.png" type="Texture" id=11]
 
 [sub_resource type="RectangleShape2D" id=5]
 extents = Vector2( 440, 280 )
@@ -24,25 +23,29 @@ extents = Vector2( 4, 280 )
 [sub_resource type="PhysicsMaterial" id=1]
 friction = 0.5
 
+[sub_resource type="StreamTexture" id=7]
+load_path = "res://.import/crate.png-c387de9b883318ae36c9fd5a499c5602.stex"
+
+[sub_resource type="RectangleShape2D" id=8]
+extents = Vector2( 42, 342 )
+
+[sub_resource type="PhysicsMaterial" id=9]
+friction = 0.5
+
+[sub_resource type="StreamTexture" id=10]
+load_path = "res://.import/crate.png-c387de9b883318ae36c9fd5a499c5602.stex"
+
+[sub_resource type="RectangleShape2D" id=11]
+extents = Vector2( 42, 67 )
+
+[sub_resource type="PhysicsMaterial" id=12]
+friction = 0.5
+
 [sub_resource type="StreamTexture" id=4]
 load_path = "res://.import/barrel.png-cafc42a0abeee03afa3b91b6b7ae5d1e.stex"
 
 [sub_resource type="CircleShape2D" id=2]
 radius = 84.0
-
-[sub_resource type="PhysicsMaterial" id=7]
-friction = 0.5
-
-[sub_resource type="StreamTexture" id=8]
-load_path = "res://.import/crate.png-c387de9b883318ae36c9fd5a499c5602.stex"
-
-[sub_resource type="RectangleShape2D" id=9]
-extents = Vector2( 42, 192 )
-
-[sub_resource type="PhysicsMaterial" id=10]
-
-[sub_resource type="RectangleShape2D" id=11]
-extents = Vector2( 92, 92 )
 
 [node name="Level" type="Node2D"]
 
@@ -121,14 +124,86 @@ shape = SubResource( 6 )
 [node name="ItemManager" type="Node" parent="."]
 script = ExtResource( 9 )
 
-[node name="Barrel" type="RigidBody2D" parent="ItemManager"]
-position = Vector2( 960, 500 )
+[node name="Crate2" type="RigidBody2D" parent="ItemManager"]
+position = Vector2( 960, 408 )
+rotation = 1.5708
 input_pickable = true
 physics_material_override = SubResource( 1 )
 gravity_scale = 0.0
 contacts_reported = 6
-script = ExtResource( 8 )
+script = ExtResource( 10 )
 isInTruck = true
+
+[node name="NinePatchRect" type="NinePatchRect" parent="ItemManager/Crate2"]
+margin_left = -50.0
+margin_top = -350.0
+margin_right = 50.0
+margin_bottom = 350.0
+texture = SubResource( 7 )
+patch_margin_left = 40
+patch_margin_top = 40
+patch_margin_right = 40
+patch_margin_bottom = 40
+axis_stretch_horizontal = 1
+axis_stretch_vertical = 1
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="ItemManager/Crate2"]
+shape = SubResource( 8 )
+
+[node name="Area2D" type="Area2D" parent="ItemManager/Crate2"]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="ItemManager/Crate2/Area2D"]
+shape = SubResource( 8 )
+
+[node name="TextureButton" type="TextureButton" parent="ItemManager/Crate2"]
+margin_left = -50.0
+margin_top = -350.0
+margin_right = 50.0
+margin_bottom = 350.0
+
+[node name="Crate3" type="RigidBody2D" parent="ItemManager"]
+position = Vector2( 600, 520 )
+input_pickable = true
+physics_material_override = SubResource( 9 )
+gravity_scale = 0.0
+contacts_reported = 6
+script = ExtResource( 10 )
+isInTruck = true
+
+[node name="NinePatchRect" type="NinePatchRect" parent="ItemManager/Crate3"]
+margin_left = -50.0
+margin_top = -75.0
+margin_right = 50.0
+margin_bottom = 75.0
+texture = SubResource( 10 )
+patch_margin_left = 40
+patch_margin_top = 40
+patch_margin_right = 40
+patch_margin_bottom = 40
+axis_stretch_horizontal = 1
+axis_stretch_vertical = 1
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="ItemManager/Crate3"]
+shape = SubResource( 11 )
+
+[node name="Area2D" type="Area2D" parent="ItemManager/Crate3"]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="ItemManager/Crate3/Area2D"]
+shape = SubResource( 11 )
+
+[node name="TextureButton" type="TextureButton" parent="ItemManager/Crate3"]
+margin_left = -50.0
+margin_top = -75.0
+margin_right = 50.0
+margin_bottom = 75.0
+
+[node name="Barrel" type="RigidBody2D" parent="ItemManager"]
+position = Vector2( 800, 940 )
+input_pickable = true
+physics_material_override = SubResource( 12 )
+gravity_scale = 0.0
+contacts_reported = 6
+script = ExtResource( 8 )
 
 [node name="NinePatchRect" type="NinePatchRect" parent="ItemManager/Barrel"]
 margin_left = -92.0
@@ -154,10 +229,42 @@ margin_bottom = 92.0
 [node name="Fragile" type="Sprite" parent="ItemManager/Barrel"]
 texture = ExtResource( 3 )
 
-[node name="Barrel2" type="RigidBody2D" parent="ItemManager"]
-position = Vector2( 960, 324 )
+[node name="Barrel3" type="RigidBody2D" parent="ItemManager"]
+position = Vector2( 1000, 900 )
 input_pickable = true
-physics_material_override = SubResource( 1 )
+physics_material_override = SubResource( 12 )
+gravity_scale = 0.0
+contacts_reported = 6
+script = ExtResource( 8 )
+
+[node name="NinePatchRect" type="NinePatchRect" parent="ItemManager/Barrel3"]
+margin_left = -92.0
+margin_top = -92.0
+margin_right = 92.0
+margin_bottom = 92.0
+texture = SubResource( 4 )
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="ItemManager/Barrel3"]
+shape = SubResource( 2 )
+
+[node name="Area2D" type="Area2D" parent="ItemManager/Barrel3"]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="ItemManager/Barrel3/Area2D"]
+shape = SubResource( 2 )
+
+[node name="TextureButton" type="TextureButton" parent="ItemManager/Barrel3"]
+margin_left = -92.0
+margin_top = -92.0
+margin_right = 92.0
+margin_bottom = 92.0
+
+[node name="Fragile" type="Sprite" parent="ItemManager/Barrel3"]
+texture = ExtResource( 3 )
+
+[node name="Barrel2" type="RigidBody2D" parent="ItemManager"]
+position = Vector2( 680, 280 )
+input_pickable = true
+physics_material_override = SubResource( 12 )
 gravity_scale = 0.0
 contacts_reported = 6
 script = ExtResource( 8 )
@@ -187,167 +294,6 @@ margin_bottom = 92.0
 [node name="Fragile" type="Sprite" parent="ItemManager/Barrel2"]
 texture = ExtResource( 3 )
 
-[node name="Crate" type="RigidBody2D" parent="ItemManager"]
-position = Vector2( 600, 840 )
-rotation = 0.872665
-input_pickable = true
-physics_material_override = SubResource( 7 )
-gravity_scale = 0.0
-contacts_reported = 6
-script = ExtResource( 10 )
-
-[node name="NinePatchRect" type="NinePatchRect" parent="ItemManager/Crate"]
-margin_left = -50.0
-margin_top = -200.0
-margin_right = 50.0
-margin_bottom = 200.0
-texture = SubResource( 8 )
-patch_margin_left = 40
-patch_margin_top = 40
-patch_margin_right = 40
-patch_margin_bottom = 40
-axis_stretch_horizontal = 1
-axis_stretch_vertical = 1
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="ItemManager/Crate"]
-shape = SubResource( 9 )
-
-[node name="Area2D" type="Area2D" parent="ItemManager/Crate"]
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="ItemManager/Crate/Area2D"]
-shape = SubResource( 9 )
-
-[node name="TextureButton" type="TextureButton" parent="ItemManager/Crate"]
-margin_left = -50.0
-margin_top = -200.0
-margin_right = 50.0
-margin_bottom = 200.0
-
-[node name="Crate2" type="RigidBody2D" parent="ItemManager"]
-position = Vector2( 960, 840 )
-rotation = -0.872665
-input_pickable = true
-physics_material_override = SubResource( 7 )
-gravity_scale = 0.0
-contacts_reported = 6
-script = ExtResource( 10 )
-
-[node name="NinePatchRect" type="NinePatchRect" parent="ItemManager/Crate2"]
-margin_left = -50.0
-margin_top = -200.0
-margin_right = 50.0
-margin_bottom = 200.0
-texture = SubResource( 8 )
-patch_margin_left = 40
-patch_margin_top = 40
-patch_margin_right = 40
-patch_margin_bottom = 40
-axis_stretch_horizontal = 1
-axis_stretch_vertical = 1
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="ItemManager/Crate2"]
-shape = SubResource( 9 )
-
-[node name="Area2D" type="Area2D" parent="ItemManager/Crate2"]
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="ItemManager/Crate2/Area2D"]
-shape = SubResource( 9 )
-
-[node name="TextureButton" type="TextureButton" parent="ItemManager/Crate2"]
-margin_left = -50.0
-margin_top = -200.0
-margin_right = 50.0
-margin_bottom = 200.0
-
-[node name="Crate3" type="RigidBody2D" parent="ItemManager"]
-position = Vector2( 1400, 920 )
-input_pickable = true
-physics_material_override = SubResource( 10 )
-gravity_scale = 0.0
-contacts_reported = 6
-script = ExtResource( 10 )
-
-[node name="NinePatchRect" type="NinePatchRect" parent="ItemManager/Crate3"]
-margin_left = -100.0
-margin_top = -100.0
-margin_right = 100.0
-margin_bottom = 100.0
-texture = ExtResource( 11 )
-patch_margin_left = 40
-patch_margin_top = 40
-patch_margin_right = 40
-patch_margin_bottom = 40
-axis_stretch_horizontal = 1
-axis_stretch_vertical = 1
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="ItemManager/Crate3"]
-shape = SubResource( 11 )
-
-[node name="Area2D" type="Area2D" parent="ItemManager/Crate3"]
-
-[node name="CollisionShape2D2" type="CollisionShape2D" parent="ItemManager/Crate3/Area2D"]
-shape = SubResource( 11 )
-
-[node name="TextureButton" type="TextureButton" parent="ItemManager/Crate3"]
-margin_left = -100.0
-margin_top = -100.0
-margin_right = 100.0
-margin_bottom = 100.0
-
-[node name="Crate4" type="RigidBody2D" parent="ItemManager"]
-position = Vector2( 1608, 920 )
-rotation = 0.174533
-input_pickable = true
-physics_material_override = SubResource( 10 )
-gravity_scale = 0.0
-contacts_reported = 6
-script = ExtResource( 10 )
-
-[node name="NinePatchRect" type="NinePatchRect" parent="ItemManager/Crate4"]
-margin_left = -100.0
-margin_top = -100.0
-margin_right = 100.0
-margin_bottom = 100.0
-texture = ExtResource( 11 )
-patch_margin_left = 40
-patch_margin_top = 40
-patch_margin_right = 40
-patch_margin_bottom = 40
-axis_stretch_horizontal = 1
-axis_stretch_vertical = 1
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="ItemManager/Crate4"]
-shape = SubResource( 11 )
-
-[node name="Area2D" type="Area2D" parent="ItemManager/Crate4"]
-
-[node name="CollisionShape2D2" type="CollisionShape2D" parent="ItemManager/Crate4/Area2D"]
-shape = SubResource( 11 )
-
-[node name="TextureButton" type="TextureButton" parent="ItemManager/Crate4"]
-margin_left = -100.0
-margin_top = -100.0
-margin_right = 100.0
-margin_bottom = 100.0
-
-[connection signal="area_entered" from="ItemManager/Barrel/Area2D" to="ItemManager/Barrel" method="_on_Area2D_area_entered"]
-[connection signal="area_exited" from="ItemManager/Barrel/Area2D" to="ItemManager/Barrel" method="_on_Area2D_area_exited"]
-[connection signal="button_down" from="ItemManager/Barrel/TextureButton" to="ItemManager/Barrel" method="_on_mouse_pressed"]
-[connection signal="button_up" from="ItemManager/Barrel/TextureButton" to="ItemManager/Barrel" method="_on_mouse_released"]
-[connection signal="mouse_entered" from="ItemManager/Barrel/TextureButton" to="ItemManager/Barrel" method="_on_mouse_entered"]
-[connection signal="mouse_exited" from="ItemManager/Barrel/TextureButton" to="ItemManager/Barrel" method="_on_mouse_exited"]
-[connection signal="area_entered" from="ItemManager/Barrel2/Area2D" to="ItemManager/Barrel2" method="_on_Area2D_area_entered"]
-[connection signal="area_exited" from="ItemManager/Barrel2/Area2D" to="ItemManager/Barrel2" method="_on_Area2D_area_exited"]
-[connection signal="button_down" from="ItemManager/Barrel2/TextureButton" to="ItemManager/Barrel2" method="_on_mouse_pressed"]
-[connection signal="button_up" from="ItemManager/Barrel2/TextureButton" to="ItemManager/Barrel2" method="_on_mouse_released"]
-[connection signal="mouse_entered" from="ItemManager/Barrel2/TextureButton" to="ItemManager/Barrel2" method="_on_mouse_entered"]
-[connection signal="mouse_exited" from="ItemManager/Barrel2/TextureButton" to="ItemManager/Barrel2" method="_on_mouse_exited"]
-[connection signal="area_entered" from="ItemManager/Crate/Area2D" to="ItemManager/Crate" method="_on_Area2D_area_entered"]
-[connection signal="area_exited" from="ItemManager/Crate/Area2D" to="ItemManager/Crate" method="_on_Area2D_area_exited"]
-[connection signal="button_down" from="ItemManager/Crate/TextureButton" to="ItemManager/Crate" method="_on_mouse_pressed"]
-[connection signal="button_up" from="ItemManager/Crate/TextureButton" to="ItemManager/Crate" method="_on_mouse_released"]
-[connection signal="mouse_entered" from="ItemManager/Crate/TextureButton" to="ItemManager/Crate" method="_on_mouse_entered"]
-[connection signal="mouse_exited" from="ItemManager/Crate/TextureButton" to="ItemManager/Crate" method="_on_mouse_exited"]
 [connection signal="area_entered" from="ItemManager/Crate2/Area2D" to="ItemManager/Crate2" method="_on_Area2D_area_entered"]
 [connection signal="area_exited" from="ItemManager/Crate2/Area2D" to="ItemManager/Crate2" method="_on_Area2D_area_exited"]
 [connection signal="button_down" from="ItemManager/Crate2/TextureButton" to="ItemManager/Crate2" method="_on_mouse_pressed"]
@@ -360,9 +306,21 @@ margin_bottom = 100.0
 [connection signal="button_up" from="ItemManager/Crate3/TextureButton" to="ItemManager/Crate3" method="_on_mouse_released"]
 [connection signal="mouse_entered" from="ItemManager/Crate3/TextureButton" to="ItemManager/Crate3" method="_on_mouse_entered"]
 [connection signal="mouse_exited" from="ItemManager/Crate3/TextureButton" to="ItemManager/Crate3" method="_on_mouse_exited"]
-[connection signal="area_entered" from="ItemManager/Crate4/Area2D" to="ItemManager/Crate4" method="_on_Area2D_area_entered"]
-[connection signal="area_exited" from="ItemManager/Crate4/Area2D" to="ItemManager/Crate4" method="_on_Area2D_area_exited"]
-[connection signal="button_down" from="ItemManager/Crate4/TextureButton" to="ItemManager/Crate4" method="_on_mouse_pressed"]
-[connection signal="button_up" from="ItemManager/Crate4/TextureButton" to="ItemManager/Crate4" method="_on_mouse_released"]
-[connection signal="mouse_entered" from="ItemManager/Crate4/TextureButton" to="ItemManager/Crate4" method="_on_mouse_entered"]
-[connection signal="mouse_exited" from="ItemManager/Crate4/TextureButton" to="ItemManager/Crate4" method="_on_mouse_exited"]
+[connection signal="area_entered" from="ItemManager/Barrel/Area2D" to="ItemManager/Barrel" method="_on_Area2D_area_entered"]
+[connection signal="area_exited" from="ItemManager/Barrel/Area2D" to="ItemManager/Barrel" method="_on_Area2D_area_exited"]
+[connection signal="button_down" from="ItemManager/Barrel/TextureButton" to="ItemManager/Barrel" method="_on_mouse_pressed"]
+[connection signal="button_up" from="ItemManager/Barrel/TextureButton" to="ItemManager/Barrel" method="_on_mouse_released"]
+[connection signal="mouse_entered" from="ItemManager/Barrel/TextureButton" to="ItemManager/Barrel" method="_on_mouse_entered"]
+[connection signal="mouse_exited" from="ItemManager/Barrel/TextureButton" to="ItemManager/Barrel" method="_on_mouse_exited"]
+[connection signal="area_entered" from="ItemManager/Barrel3/Area2D" to="ItemManager/Barrel3" method="_on_Area2D_area_entered"]
+[connection signal="area_exited" from="ItemManager/Barrel3/Area2D" to="ItemManager/Barrel3" method="_on_Area2D_area_exited"]
+[connection signal="button_down" from="ItemManager/Barrel3/TextureButton" to="ItemManager/Barrel3" method="_on_mouse_pressed"]
+[connection signal="button_up" from="ItemManager/Barrel3/TextureButton" to="ItemManager/Barrel3" method="_on_mouse_released"]
+[connection signal="mouse_entered" from="ItemManager/Barrel3/TextureButton" to="ItemManager/Barrel3" method="_on_mouse_entered"]
+[connection signal="mouse_exited" from="ItemManager/Barrel3/TextureButton" to="ItemManager/Barrel3" method="_on_mouse_exited"]
+[connection signal="area_entered" from="ItemManager/Barrel2/Area2D" to="ItemManager/Barrel2" method="_on_Area2D_area_entered"]
+[connection signal="area_exited" from="ItemManager/Barrel2/Area2D" to="ItemManager/Barrel2" method="_on_Area2D_area_exited"]
+[connection signal="button_down" from="ItemManager/Barrel2/TextureButton" to="ItemManager/Barrel2" method="_on_mouse_pressed"]
+[connection signal="button_up" from="ItemManager/Barrel2/TextureButton" to="ItemManager/Barrel2" method="_on_mouse_released"]
+[connection signal="mouse_entered" from="ItemManager/Barrel2/TextureButton" to="ItemManager/Barrel2" method="_on_mouse_entered"]
+[connection signal="mouse_exited" from="ItemManager/Barrel2/TextureButton" to="ItemManager/Barrel2" method="_on_mouse_exited"]
