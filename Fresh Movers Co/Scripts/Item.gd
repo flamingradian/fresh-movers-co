@@ -33,6 +33,7 @@ func _ready():
 		self.gravity_scale = 8
 	else:
 		self.layers = 0x2
+		self.sleeping = true
 	
 	var truckStorageArea = get_node(truckStorageAreaPath)
 	truckStorageArea.connect("area_entered", self, "_on_Truck_Area2D_area_entered")
@@ -47,7 +48,17 @@ func _process(delta):
 			isSelected = false
 	
 	if isSelected:
-		self.position = get_viewport().get_mouse_position()
+		var moveIncrement = 999
+		if isHoveringOverTruck and collideCount == 1:
+			moveIncrement = 20
+			
+		var displacement = get_viewport().get_mouse_position() - self.position
+		if displacement.length() < moveIncrement:
+			self.position = get_viewport().get_mouse_position()
+		else:
+			var theta = atan2(displacement.y, displacement.x)
+			self.position += Vector2(cos(theta), sin(theta)) * moveIncrement
+		
 		self.z_index = 1
 	else:
 		if isInTruck == false:
@@ -123,10 +134,11 @@ func _on_mouse_released():
 			isSelected = false
 			itemManager.SetIsItemSelected(false)
 			itemManager.AddItemToTruck()
-
+			
 			self.set_default_texture()
 			self.layers = 0x1
 			self.gravity_scale = 8
+			
 		else: # Deselect crate
 			isSelected = false
 			itemManager.SetIsItemSelected(false)
@@ -148,9 +160,7 @@ func _on_Area2D_area_exited(area):
 func _on_Truck_Area2D_area_entered(area):
 	if startDetection and area.get_parent().name == self.name:
 		isHoveringOverTruck = true
-		print("Truck")
 
 func _on_Truck_Area2D_area_exited(area):
 	if startDetection and area.get_parent().name == self.name:
 		isHoveringOverTruck = false
-		print("Truck Exit")

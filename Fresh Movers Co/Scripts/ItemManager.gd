@@ -7,8 +7,6 @@ var itemsInTruck = 0
 func AddItemToTruck():
 	itemsInTruck += 1
 	levelManager.SetScoreToAdd(max(0, 100 - 30 * (itemsList.size() - itemsInTruck)))
-	
-		
 
 var isItemSelected = false setget SetIsItemSelected, GetIsItemSelected
 func SetIsItemSelected(new_value):
