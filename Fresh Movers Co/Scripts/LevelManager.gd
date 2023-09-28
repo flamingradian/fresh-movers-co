@@ -2,6 +2,7 @@ extends Node
 
 signal level_complete
 
+var isTransitioning = false
 var soundTrackMuted = false
 var sfxMuted = false
 func _on_Music_Slider_value_changed(value):
@@ -39,7 +40,7 @@ func GetIsLevelComplete():
 	
 var levelNum = 0
 var levels = [
-	#preload("res://Scenes/Levels/Start.tscn"),
+	preload("res://Scenes/Levels/Start.tscn"),
 	preload("res://Scenes/Levels/Level1.tscn"),
 	preload("res://Scenes/Levels/Level2.tscn"),
 	preload("res://Scenes/Levels/Level3.tscn"),
@@ -75,12 +76,15 @@ func _process(delta):
 		advance()
 
 func advance():
-	if not isLevelComplete:
-		isLevelComplete = true
-		emit_signal("level_complete")
+	if levelNum == 0 and not isTransitioning:
+		StartNextLevel()
 	else:
-		if levelNum < levels.size() - 1 and isDrivingAway:
-			StartNextLevel()
+		if not isLevelComplete:
+			isLevelComplete = true
+			emit_signal("level_complete")
+		elif not isTransitioning:
+			if levelNum < levels.size() - 1 and isDrivingAway:
+				StartNextLevel()
 
 # End the current level and start a new one. It may be the same level in the
 # case of a reset, or the next one if the player finishes the current one.
@@ -90,15 +94,18 @@ func StartLevel():
 	isLevelComplete = false
 	isDrivingAway = false
 	SetScoreToAdd(0) 
-	
+	isTransitioning = false
 
 func StartNextLevel():
 	levelNum += 1
 	score += scoreToAdd
 	SceneTransition.TransitionWhite()
+	isTransitioning = true
 	
 func _on_RestartButton_pressed():
-	SceneTransition.TransitionBlack()
+	if not isTransitioning:
+		SceneTransition.TransitionBlack()
+		isTransitioning = true
 
 func _on_advance_button_pressed():
 	advance()
