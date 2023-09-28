@@ -24,6 +24,7 @@ func _on_SFX_Slider_value_changed(value):
 var score = 0
 var scoreToAdd = 0 setget SetScoreToAdd
 onready var scoreText = get_node("/root/Main/ScoreText")
+onready var storyText = get_node("/root/Main/StoryText")
 func SetScoreToAdd(new_value):
 	scoreToAdd = new_value
 	scoreText.text = "Score: " + str(score) + " (+" + str(scoreToAdd) + ")"
@@ -38,6 +39,8 @@ var isLevelComplete setget , GetIsLevelComplete
 func GetIsLevelComplete():
 	return isLevelComplete
 	
+onready var restartButton = get_node("/root/Main/RestartButton")
+
 var levelNum = 0
 var levels = [
 	preload("res://Scenes/Levels/Start.tscn"),
@@ -57,16 +60,30 @@ var levels = [
 	preload("res://Scenes/Levels/Level14.tscn"),
 	preload("res://Scenes/Levels/Level15.tscn"),
 ]
-
-# Declare member variables here. Examples:
-# var a = 2
-# var b = "text"
+var storyTextList = [
+	"",
+	"Use your mouse to drag items into the truck. Press space to drive away.",
+	"This is harder than it looks. I thought we just had to put them in the truck.",
+	"Client: Are you sure this will fit?",
+	"Our house was a mess. Glad we can finally leave it behind.",
+	"Maybe we shouldn’t have stored our items in barrels...",
+	"This will be the last obstacle we will need to move out of our way.",
+	"Be careful! I have some fragile items in there.",
+	"It’s great to have someone to lean on. Thank you.",
+	"Fragile relationships are the worst! I’m ready to start anew.",
+	"We wanted to move out quickly.",
+	"It was tough trying to balance everything out.",
+	"Please keep these boxes right side up.",
+	"I'm planning to move closer to my family. I want to visit often.",
+	"When I face an issue, I try to shake things up. Find some new perspectives.",
+	"We gave it some good thought. In the end, we decided to start fresh.",
+]
 
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
-	var restartButton = get_node("/root/Main/RestartButton")
 	restartButton.connect("pressed", self, "_on_RestartButton_pressed")
+	restartButton.visible = false
 	StartLevel()
 
 
@@ -74,6 +91,9 @@ func _ready():
 func _process(delta):
 	if Input.is_action_just_pressed("ui_select"):
 		advance()
+	
+	if isLevelComplete:
+		storyText.modulate.a -= delta
 
 func advance():
 	if levelNum == 0 and not isTransitioning:
@@ -94,7 +114,11 @@ func StartLevel():
 	isLevelComplete = false
 	isDrivingAway = false
 	SetScoreToAdd(0) 
+	storyText.text = storyTextList[levelNum]
+	storyText.modulate.a = 1
 	isTransitioning = false
+	if levelNum > 0:
+		restartButton.visible = true
 
 func StartNextLevel():
 	levelNum += 1

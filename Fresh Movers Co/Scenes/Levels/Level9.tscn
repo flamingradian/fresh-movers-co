@@ -1,4 +1,4 @@
-[gd_scene load_steps=17 format=2]
+[gd_scene load_steps=18 format=2]
 
 [ext_resource path="res://Scripts/Truck.gd" type="Script" id=1]
 [ext_resource path="res://Scripts/NextLevelText.gd" type="Script" id=2]
@@ -9,6 +9,9 @@
 [ext_resource path="res://Sprites/NextLevelText.png" type="Texture" id=7]
 [ext_resource path="res://Scripts/FragileItem.gd" type="Script" id=8]
 [ext_resource path="res://Scripts/ItemManager.gd" type="Script" id=9]
+[ext_resource path="res://Sprites/crate.png" type="Texture" id=10]
+[ext_resource path="res://Scenes/Items/Crate.tscn" type="PackedScene" id=11]
+[ext_resource path="res://Scenes/Items/Barrel.tscn" type="PackedScene" id=12]
 
 [sub_resource type="RectangleShape2D" id=5]
 extents = Vector2( 440, 280 )
@@ -20,16 +23,9 @@ extents = Vector2( 440, 8 )
 extents = Vector2( 4, 280 )
 
 [sub_resource type="PhysicsMaterial" id=1]
-friction = 0.5
 
-[sub_resource type="StreamTexture" id=7]
-load_path = "res://.import/crate.png-c387de9b883318ae36c9fd5a499c5602.stex"
-
-[sub_resource type="RectangleShape2D" id=8]
-extents = Vector2( 42, 192 )
-
-[sub_resource type="RectangleShape2D" id=9]
-extents = Vector2( 42, 142 )
+[sub_resource type="RectangleShape2D" id=4]
+extents = Vector2( 92, 92 )
 
 [node name="Level" type="Node2D"]
 
@@ -108,21 +104,21 @@ shape = SubResource( 6 )
 [node name="ItemManager" type="Node" parent="."]
 script = ExtResource( 9 )
 
-[node name="Crate" type="RigidBody2D" parent="ItemManager"]
-position = Vector2( 600, 840 )
-rotation = 0.349066
+[node name="FragileCrate2" type="RigidBody2D" parent="ItemManager"]
+position = Vector2( 900, 920 )
+rotation = 0.698132
 input_pickable = true
 physics_material_override = SubResource( 1 )
 gravity_scale = 0.0
 contacts_reported = 6
 script = ExtResource( 8 )
 
-[node name="NinePatchRect" type="NinePatchRect" parent="ItemManager/Crate"]
-margin_left = -50.0
-margin_top = -200.0
-margin_right = 50.0
-margin_bottom = 200.0
-texture = SubResource( 7 )
+[node name="NinePatchRect" type="NinePatchRect" parent="ItemManager/FragileCrate2"]
+margin_left = -100.0
+margin_top = -100.0
+margin_right = 100.0
+margin_bottom = 100.0
+texture = ExtResource( 10 )
 patch_margin_left = 40
 patch_margin_top = 40
 patch_margin_right = 40
@@ -130,38 +126,38 @@ patch_margin_bottom = 40
 axis_stretch_horizontal = 1
 axis_stretch_vertical = 1
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="ItemManager/Crate"]
-shape = SubResource( 8 )
+[node name="CollisionShape2D" type="CollisionShape2D" parent="ItemManager/FragileCrate2"]
+shape = SubResource( 4 )
 
-[node name="Area2D" type="Area2D" parent="ItemManager/Crate"]
+[node name="Area2D" type="Area2D" parent="ItemManager/FragileCrate2"]
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="ItemManager/Crate/Area2D"]
-shape = SubResource( 8 )
+[node name="CollisionShape2D2" type="CollisionShape2D" parent="ItemManager/FragileCrate2/Area2D"]
+shape = SubResource( 4 )
 
-[node name="TextureButton" type="TextureButton" parent="ItemManager/Crate"]
-margin_left = -50.0
-margin_top = -200.0
-margin_right = 50.0
-margin_bottom = 200.0
+[node name="TextureButton" type="TextureButton" parent="ItemManager/FragileCrate2"]
+margin_left = -100.0
+margin_top = -100.0
+margin_right = 100.0
+margin_bottom = 100.0
 
-[node name="Fragile" type="Sprite" parent="ItemManager/Crate"]
+[node name="Fragile" type="Sprite" parent="ItemManager/FragileCrate2"]
 texture = ExtResource( 3 )
 
-[node name="Crate3" type="RigidBody2D" parent="ItemManager"]
-position = Vector2( 1000, 840 )
-rotation = 0.349066
+[node name="FragileCrate3" type="RigidBody2D" parent="ItemManager"]
+position = Vector2( 340, 920 )
+rotation = 0.698132
 input_pickable = true
 physics_material_override = SubResource( 1 )
 gravity_scale = 0.0
 contacts_reported = 6
 script = ExtResource( 8 )
 
-[node name="NinePatchRect" type="NinePatchRect" parent="ItemManager/Crate3"]
-margin_left = -50.0
-margin_top = -200.0
-margin_right = 50.0
-margin_bottom = 200.0
-texture = SubResource( 7 )
+[node name="NinePatchRect" type="NinePatchRect" parent="ItemManager/FragileCrate3"]
+margin_left = -100.0
+margin_top = -100.0
+margin_right = 100.0
+margin_bottom = 100.0
+texture = ExtResource( 10 )
 patch_margin_left = 40
 patch_margin_top = 40
 patch_margin_right = 40
@@ -169,38 +165,38 @@ patch_margin_bottom = 40
 axis_stretch_horizontal = 1
 axis_stretch_vertical = 1
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="ItemManager/Crate3"]
-shape = SubResource( 8 )
+[node name="CollisionShape2D" type="CollisionShape2D" parent="ItemManager/FragileCrate3"]
+shape = SubResource( 4 )
 
-[node name="Area2D" type="Area2D" parent="ItemManager/Crate3"]
+[node name="Area2D" type="Area2D" parent="ItemManager/FragileCrate3"]
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="ItemManager/Crate3/Area2D"]
-shape = SubResource( 8 )
+[node name="CollisionShape2D2" type="CollisionShape2D" parent="ItemManager/FragileCrate3/Area2D"]
+shape = SubResource( 4 )
 
-[node name="TextureButton" type="TextureButton" parent="ItemManager/Crate3"]
-margin_left = -50.0
-margin_top = -200.0
-margin_right = 50.0
-margin_bottom = 200.0
+[node name="TextureButton" type="TextureButton" parent="ItemManager/FragileCrate3"]
+margin_left = -100.0
+margin_top = -100.0
+margin_right = 100.0
+margin_bottom = 100.0
 
-[node name="Fragile" type="Sprite" parent="ItemManager/Crate3"]
+[node name="Fragile" type="Sprite" parent="ItemManager/FragileCrate3"]
 texture = ExtResource( 3 )
 
-[node name="Crate4" type="RigidBody2D" parent="ItemManager"]
-position = Vector2( 1400, 840 )
-rotation = 0.349066
+[node name="FragileCrate4" type="RigidBody2D" parent="ItemManager"]
+position = Vector2( 1260, 880 )
+rotation = -0.698132
 input_pickable = true
 physics_material_override = SubResource( 1 )
 gravity_scale = 0.0
 contacts_reported = 6
 script = ExtResource( 8 )
 
-[node name="NinePatchRect" type="NinePatchRect" parent="ItemManager/Crate4"]
-margin_left = -50.0
-margin_top = -200.0
-margin_right = 50.0
-margin_bottom = 200.0
-texture = SubResource( 7 )
+[node name="NinePatchRect" type="NinePatchRect" parent="ItemManager/FragileCrate4"]
+margin_left = -100.0
+margin_top = -100.0
+margin_right = 100.0
+margin_bottom = 100.0
+texture = ExtResource( 10 )
 patch_margin_left = 40
 patch_margin_top = 40
 patch_margin_right = 40
@@ -208,38 +204,38 @@ patch_margin_bottom = 40
 axis_stretch_horizontal = 1
 axis_stretch_vertical = 1
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="ItemManager/Crate4"]
-shape = SubResource( 8 )
+[node name="CollisionShape2D" type="CollisionShape2D" parent="ItemManager/FragileCrate4"]
+shape = SubResource( 4 )
 
-[node name="Area2D" type="Area2D" parent="ItemManager/Crate4"]
+[node name="Area2D" type="Area2D" parent="ItemManager/FragileCrate4"]
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="ItemManager/Crate4/Area2D"]
-shape = SubResource( 8 )
+[node name="CollisionShape2D2" type="CollisionShape2D" parent="ItemManager/FragileCrate4/Area2D"]
+shape = SubResource( 4 )
 
-[node name="TextureButton" type="TextureButton" parent="ItemManager/Crate4"]
-margin_left = -50.0
-margin_top = -200.0
-margin_right = 50.0
-margin_bottom = 200.0
+[node name="TextureButton" type="TextureButton" parent="ItemManager/FragileCrate4"]
+margin_left = -100.0
+margin_top = -100.0
+margin_right = 100.0
+margin_bottom = 100.0
 
-[node name="Fragile" type="Sprite" parent="ItemManager/Crate4"]
+[node name="Fragile" type="Sprite" parent="ItemManager/FragileCrate4"]
 texture = ExtResource( 3 )
 
-[node name="Crate2" type="RigidBody2D" parent="ItemManager"]
-position = Vector2( 1180, 880 )
-rotation = -0.523599
+[node name="FragileCrate5" type="RigidBody2D" parent="ItemManager"]
+position = Vector2( 660, 880 )
+rotation = -0.698132
 input_pickable = true
 physics_material_override = SubResource( 1 )
 gravity_scale = 0.0
 contacts_reported = 6
 script = ExtResource( 8 )
 
-[node name="NinePatchRect" type="NinePatchRect" parent="ItemManager/Crate2"]
-margin_left = -50.0
-margin_top = -150.0
-margin_right = 50.0
-margin_bottom = 150.0
-texture = SubResource( 7 )
+[node name="NinePatchRect" type="NinePatchRect" parent="ItemManager/FragileCrate5"]
+margin_left = -100.0
+margin_top = -100.0
+margin_right = 100.0
+margin_bottom = 100.0
+texture = ExtResource( 10 )
 patch_margin_left = 40
 patch_margin_top = 40
 patch_margin_right = 40
@@ -247,38 +243,37 @@ patch_margin_bottom = 40
 axis_stretch_horizontal = 1
 axis_stretch_vertical = 1
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="ItemManager/Crate2"]
-shape = SubResource( 9 )
+[node name="CollisionShape2D" type="CollisionShape2D" parent="ItemManager/FragileCrate5"]
+shape = SubResource( 4 )
 
-[node name="Area2D" type="Area2D" parent="ItemManager/Crate2"]
+[node name="Area2D" type="Area2D" parent="ItemManager/FragileCrate5"]
 
-[node name="CollisionShape2D2" type="CollisionShape2D" parent="ItemManager/Crate2/Area2D"]
-shape = SubResource( 9 )
+[node name="CollisionShape2D2" type="CollisionShape2D" parent="ItemManager/FragileCrate5/Area2D"]
+shape = SubResource( 4 )
 
-[node name="TextureButton" type="TextureButton" parent="ItemManager/Crate2"]
-margin_left = -50.0
-margin_top = -150.0
-margin_right = 50.0
-margin_bottom = 150.0
+[node name="TextureButton" type="TextureButton" parent="ItemManager/FragileCrate5"]
+margin_left = -100.0
+margin_top = -100.0
+margin_right = 100.0
+margin_bottom = 100.0
 
-[node name="Fragile" type="Sprite" parent="ItemManager/Crate2"]
+[node name="Fragile" type="Sprite" parent="ItemManager/FragileCrate5"]
 texture = ExtResource( 3 )
 
-[node name="Crate5" type="RigidBody2D" parent="ItemManager"]
-position = Vector2( 1580, 880 )
-rotation = -0.523599
+[node name="FragileCrate7" type="RigidBody2D" parent="ItemManager"]
+position = Vector2( 100, 880 )
 input_pickable = true
 physics_material_override = SubResource( 1 )
 gravity_scale = 0.0
 contacts_reported = 6
 script = ExtResource( 8 )
 
-[node name="NinePatchRect" type="NinePatchRect" parent="ItemManager/Crate5"]
-margin_left = -50.0
-margin_top = -150.0
-margin_right = 50.0
-margin_bottom = 150.0
-texture = SubResource( 7 )
+[node name="NinePatchRect" type="NinePatchRect" parent="ItemManager/FragileCrate7"]
+margin_left = -100.0
+margin_top = -100.0
+margin_right = 100.0
+margin_bottom = 100.0
+texture = ExtResource( 10 )
 patch_margin_left = 40
 patch_margin_top = 40
 patch_margin_right = 40
@@ -286,95 +281,57 @@ patch_margin_bottom = 40
 axis_stretch_horizontal = 1
 axis_stretch_vertical = 1
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="ItemManager/Crate5"]
-shape = SubResource( 9 )
+[node name="CollisionShape2D" type="CollisionShape2D" parent="ItemManager/FragileCrate7"]
+shape = SubResource( 4 )
 
-[node name="Area2D" type="Area2D" parent="ItemManager/Crate5"]
+[node name="Area2D" type="Area2D" parent="ItemManager/FragileCrate7"]
 
-[node name="CollisionShape2D2" type="CollisionShape2D" parent="ItemManager/Crate5/Area2D"]
-shape = SubResource( 9 )
+[node name="CollisionShape2D2" type="CollisionShape2D" parent="ItemManager/FragileCrate7/Area2D"]
+shape = SubResource( 4 )
 
-[node name="TextureButton" type="TextureButton" parent="ItemManager/Crate5"]
-margin_left = -50.0
-margin_top = -150.0
-margin_right = 50.0
-margin_bottom = 150.0
+[node name="TextureButton" type="TextureButton" parent="ItemManager/FragileCrate7"]
+margin_left = -100.0
+margin_top = -100.0
+margin_right = 100.0
+margin_bottom = 100.0
 
-[node name="Fragile" type="Sprite" parent="ItemManager/Crate5"]
+[node name="Fragile" type="Sprite" parent="ItemManager/FragileCrate7"]
 texture = ExtResource( 3 )
 
-[node name="Crate6" type="RigidBody2D" parent="ItemManager"]
-position = Vector2( 780, 880 )
-rotation = -0.523599
-input_pickable = true
-physics_material_override = SubResource( 1 )
-gravity_scale = 0.0
-contacts_reported = 6
-script = ExtResource( 8 )
+[node name="Barrel" parent="ItemManager" instance=ExtResource( 12 )]
+position = Vector2( 1500, 920 )
 
-[node name="NinePatchRect" type="NinePatchRect" parent="ItemManager/Crate6"]
-margin_left = -50.0
-margin_top = -150.0
-margin_right = 50.0
-margin_bottom = 150.0
-texture = SubResource( 7 )
-patch_margin_left = 40
-patch_margin_top = 40
-patch_margin_right = 40
-patch_margin_bottom = 40
-axis_stretch_horizontal = 1
-axis_stretch_vertical = 1
+[node name="Crate" parent="ItemManager" instance=ExtResource( 11 )]
+position = Vector2( 1760, 880 )
+rotation = -0.174533
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="ItemManager/Crate6"]
-shape = SubResource( 9 )
-
-[node name="Area2D" type="Area2D" parent="ItemManager/Crate6"]
-
-[node name="CollisionShape2D2" type="CollisionShape2D" parent="ItemManager/Crate6/Area2D"]
-shape = SubResource( 9 )
-
-[node name="TextureButton" type="TextureButton" parent="ItemManager/Crate6"]
-margin_left = -50.0
-margin_top = -150.0
-margin_right = 50.0
-margin_bottom = 150.0
-
-[node name="Fragile" type="Sprite" parent="ItemManager/Crate6"]
-texture = ExtResource( 3 )
-
-[connection signal="area_entered" from="ItemManager/Crate/Area2D" to="ItemManager/Crate" method="_on_Area2D_area_entered"]
-[connection signal="area_exited" from="ItemManager/Crate/Area2D" to="ItemManager/Crate" method="_on_Area2D_area_exited"]
-[connection signal="button_down" from="ItemManager/Crate/TextureButton" to="ItemManager/Crate" method="_on_mouse_pressed"]
-[connection signal="button_up" from="ItemManager/Crate/TextureButton" to="ItemManager/Crate" method="_on_mouse_released"]
-[connection signal="mouse_entered" from="ItemManager/Crate/TextureButton" to="ItemManager/Crate" method="_on_mouse_entered"]
-[connection signal="mouse_exited" from="ItemManager/Crate/TextureButton" to="ItemManager/Crate" method="_on_mouse_exited"]
-[connection signal="area_entered" from="ItemManager/Crate3/Area2D" to="ItemManager/Crate3" method="_on_Area2D_area_entered"]
-[connection signal="area_exited" from="ItemManager/Crate3/Area2D" to="ItemManager/Crate3" method="_on_Area2D_area_exited"]
-[connection signal="button_down" from="ItemManager/Crate3/TextureButton" to="ItemManager/Crate3" method="_on_mouse_pressed"]
-[connection signal="button_up" from="ItemManager/Crate3/TextureButton" to="ItemManager/Crate3" method="_on_mouse_released"]
-[connection signal="mouse_entered" from="ItemManager/Crate3/TextureButton" to="ItemManager/Crate3" method="_on_mouse_entered"]
-[connection signal="mouse_exited" from="ItemManager/Crate3/TextureButton" to="ItemManager/Crate3" method="_on_mouse_exited"]
-[connection signal="area_entered" from="ItemManager/Crate4/Area2D" to="ItemManager/Crate4" method="_on_Area2D_area_entered"]
-[connection signal="area_exited" from="ItemManager/Crate4/Area2D" to="ItemManager/Crate4" method="_on_Area2D_area_exited"]
-[connection signal="button_down" from="ItemManager/Crate4/TextureButton" to="ItemManager/Crate4" method="_on_mouse_pressed"]
-[connection signal="button_up" from="ItemManager/Crate4/TextureButton" to="ItemManager/Crate4" method="_on_mouse_released"]
-[connection signal="mouse_entered" from="ItemManager/Crate4/TextureButton" to="ItemManager/Crate4" method="_on_mouse_entered"]
-[connection signal="mouse_exited" from="ItemManager/Crate4/TextureButton" to="ItemManager/Crate4" method="_on_mouse_exited"]
-[connection signal="area_entered" from="ItemManager/Crate2/Area2D" to="ItemManager/Crate2" method="_on_Area2D_area_entered"]
-[connection signal="area_exited" from="ItemManager/Crate2/Area2D" to="ItemManager/Crate2" method="_on_Area2D_area_exited"]
-[connection signal="button_down" from="ItemManager/Crate2/TextureButton" to="ItemManager/Crate2" method="_on_mouse_pressed"]
-[connection signal="button_up" from="ItemManager/Crate2/TextureButton" to="ItemManager/Crate2" method="_on_mouse_released"]
-[connection signal="mouse_entered" from="ItemManager/Crate2/TextureButton" to="ItemManager/Crate2" method="_on_mouse_entered"]
-[connection signal="mouse_exited" from="ItemManager/Crate2/TextureButton" to="ItemManager/Crate2" method="_on_mouse_exited"]
-[connection signal="area_entered" from="ItemManager/Crate5/Area2D" to="ItemManager/Crate5" method="_on_Area2D_area_entered"]
-[connection signal="area_exited" from="ItemManager/Crate5/Area2D" to="ItemManager/Crate5" method="_on_Area2D_area_exited"]
-[connection signal="button_down" from="ItemManager/Crate5/TextureButton" to="ItemManager/Crate5" method="_on_mouse_pressed"]
-[connection signal="button_up" from="ItemManager/Crate5/TextureButton" to="ItemManager/Crate5" method="_on_mouse_released"]
-[connection signal="mouse_entered" from="ItemManager/Crate5/TextureButton" to="ItemManager/Crate5" method="_on_mouse_entered"]
-[connection signal="mouse_exited" from="ItemManager/Crate5/TextureButton" to="ItemManager/Crate5" method="_on_mouse_exited"]
-[connection signal="area_entered" from="ItemManager/Crate6/Area2D" to="ItemManager/Crate6" method="_on_Area2D_area_entered"]
-[connection signal="area_exited" from="ItemManager/Crate6/Area2D" to="ItemManager/Crate6" method="_on_Area2D_area_exited"]
-[connection signal="button_down" from="ItemManager/Crate6/TextureButton" to="ItemManager/Crate6" method="_on_mouse_pressed"]
-[connection signal="button_up" from="ItemManager/Crate6/TextureButton" to="ItemManager/Crate6" method="_on_mouse_released"]
-[connection signal="mouse_entered" from="ItemManager/Crate6/TextureButton" to="ItemManager/Crate6" method="_on_mouse_entered"]
-[connection signal="mouse_exited" from="ItemManager/Crate6/TextureButton" to="ItemManager/Crate6" method="_on_mouse_exited"]
+[connection signal="area_entered" from="ItemManager/FragileCrate2/Area2D" to="ItemManager/FragileCrate2" method="_on_Area2D_area_entered"]
+[connection signal="area_exited" from="ItemManager/FragileCrate2/Area2D" to="ItemManager/FragileCrate2" method="_on_Area2D_area_exited"]
+[connection signal="button_down" from="ItemManager/FragileCrate2/TextureButton" to="ItemManager/FragileCrate2" method="_on_mouse_pressed"]
+[connection signal="button_up" from="ItemManager/FragileCrate2/TextureButton" to="ItemManager/FragileCrate2" method="_on_mouse_released"]
+[connection signal="mouse_entered" from="ItemManager/FragileCrate2/TextureButton" to="ItemManager/FragileCrate2" method="_on_mouse_entered"]
+[connection signal="mouse_exited" from="ItemManager/FragileCrate2/TextureButton" to="ItemManager/FragileCrate2" method="_on_mouse_exited"]
+[connection signal="area_entered" from="ItemManager/FragileCrate3/Area2D" to="ItemManager/FragileCrate3" method="_on_Area2D_area_entered"]
+[connection signal="area_exited" from="ItemManager/FragileCrate3/Area2D" to="ItemManager/FragileCrate3" method="_on_Area2D_area_exited"]
+[connection signal="button_down" from="ItemManager/FragileCrate3/TextureButton" to="ItemManager/FragileCrate3" method="_on_mouse_pressed"]
+[connection signal="button_up" from="ItemManager/FragileCrate3/TextureButton" to="ItemManager/FragileCrate3" method="_on_mouse_released"]
+[connection signal="mouse_entered" from="ItemManager/FragileCrate3/TextureButton" to="ItemManager/FragileCrate3" method="_on_mouse_entered"]
+[connection signal="mouse_exited" from="ItemManager/FragileCrate3/TextureButton" to="ItemManager/FragileCrate3" method="_on_mouse_exited"]
+[connection signal="area_entered" from="ItemManager/FragileCrate4/Area2D" to="ItemManager/FragileCrate4" method="_on_Area2D_area_entered"]
+[connection signal="area_exited" from="ItemManager/FragileCrate4/Area2D" to="ItemManager/FragileCrate4" method="_on_Area2D_area_exited"]
+[connection signal="button_down" from="ItemManager/FragileCrate4/TextureButton" to="ItemManager/FragileCrate4" method="_on_mouse_pressed"]
+[connection signal="button_up" from="ItemManager/FragileCrate4/TextureButton" to="ItemManager/FragileCrate4" method="_on_mouse_released"]
+[connection signal="mouse_entered" from="ItemManager/FragileCrate4/TextureButton" to="ItemManager/FragileCrate4" method="_on_mouse_entered"]
+[connection signal="mouse_exited" from="ItemManager/FragileCrate4/TextureButton" to="ItemManager/FragileCrate4" method="_on_mouse_exited"]
+[connection signal="area_entered" from="ItemManager/FragileCrate5/Area2D" to="ItemManager/FragileCrate5" method="_on_Area2D_area_entered"]
+[connection signal="area_exited" from="ItemManager/FragileCrate5/Area2D" to="ItemManager/FragileCrate5" method="_on_Area2D_area_exited"]
+[connection signal="button_down" from="ItemManager/FragileCrate5/TextureButton" to="ItemManager/FragileCrate5" method="_on_mouse_pressed"]
+[connection signal="button_up" from="ItemManager/FragileCrate5/TextureButton" to="ItemManager/FragileCrate5" method="_on_mouse_released"]
+[connection signal="mouse_entered" from="ItemManager/FragileCrate5/TextureButton" to="ItemManager/FragileCrate5" method="_on_mouse_entered"]
+[connection signal="mouse_exited" from="ItemManager/FragileCrate5/TextureButton" to="ItemManager/FragileCrate5" method="_on_mouse_exited"]
+[connection signal="area_entered" from="ItemManager/FragileCrate7/Area2D" to="ItemManager/FragileCrate7" method="_on_Area2D_area_entered"]
+[connection signal="area_exited" from="ItemManager/FragileCrate7/Area2D" to="ItemManager/FragileCrate7" method="_on_Area2D_area_exited"]
+[connection signal="button_down" from="ItemManager/FragileCrate7/TextureButton" to="ItemManager/FragileCrate7" method="_on_mouse_pressed"]
+[connection signal="button_up" from="ItemManager/FragileCrate7/TextureButton" to="ItemManager/FragileCrate7" method="_on_mouse_released"]
+[connection signal="mouse_entered" from="ItemManager/FragileCrate7/TextureButton" to="ItemManager/FragileCrate7" method="_on_mouse_entered"]
+[connection signal="mouse_exited" from="ItemManager/FragileCrate7/TextureButton" to="ItemManager/FragileCrate7" method="_on_mouse_exited"]
