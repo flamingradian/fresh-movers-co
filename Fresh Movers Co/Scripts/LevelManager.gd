@@ -61,6 +61,7 @@ var levels = [
 	preload("res://Scenes/Levels/Level13.tscn"),
 	preload("res://Scenes/Levels/Level14.tscn"),
 	preload("res://Scenes/Levels/Level15.tscn"),
+	preload("res://Scenes/Levels/Finish.tscn"),
 ]
 var storyTextList = [
 	"",
@@ -79,6 +80,7 @@ var storyTextList = [
 	"'I'm planning to move closer to my family. I want to visit often.'",
 	"'I haven't thought about how to arrange the furniture yet.'",
 	"'We gave it some good thought. In the end, we decided to start fresh.'",
+	"",
 ]
 
 
@@ -113,13 +115,22 @@ func advance():
 func StartLevel():
 	self.remove_child($Level)
 	self.add_child(levels[levelNum].instance())
+	isTransitioning = false
 	isLevelComplete = false
 	isDrivingAway = false
+	
 	SetScoreToAdd(0) 
 	storyText.text = storyTextList[levelNum]
 	storyText.modulate.a = 1
-	isTransitioning = false
-	if levelNum > 0:
+	if levelNum == 0 or levelNum > 15:
+		scoreText.modulate.a = 0
+		restartButton.visible = false
+		if levelNum > 15:
+			var finalScoreText = get_node("/root/Main/LevelManager/Level/FinalScoreText")
+			finalScoreText.rect_position.x = 880 - str(score).length() * 25
+			finalScoreText.text = str(score) + "/1500"
+	else:
+		scoreText.modulate.a = 1
 		restartButton.visible = true
 
 func StartNextLevel():
