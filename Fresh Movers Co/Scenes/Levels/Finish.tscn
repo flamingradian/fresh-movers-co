@@ -28,7 +28,7 @@ texture = ExtResource( 3 )
 [node name="FinalScoreText2" type="RichTextLabel" parent="."]
 margin_left = 670.0
 margin_top = 600.0
-margin_right = 830.0
+margin_right = 850.0
 margin_bottom = 640.0
 rect_scale = Vector2( 4, 6 )
 mouse_filter = 2
