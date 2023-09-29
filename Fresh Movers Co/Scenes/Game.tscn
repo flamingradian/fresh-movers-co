@@ -50,7 +50,7 @@ bus = "SoundTrack"
 script = ExtResource( 7 )
 
 [node name="MusicSlider" type="Node2D" parent="."]
-position = Vector2( 1560, 88 )
+position = Vector2( 1561, 87 )
 script = ExtResource( 9 )
 
 [node name="Music Label" type="RichTextLabel" parent="MusicSlider"]
@@ -60,8 +60,8 @@ margin_right = 84.0
 margin_bottom = -10.0
 rect_scale = Vector2( 2, 3 )
 mouse_filter = 2
-custom_colors/default_color = Color( 1, 0, 1, 1 )
 custom_fonts/normal_font = SubResource( 1 )
+custom_colors/default_color = Color( 1, 0, 1, 1 )
 text = "music"
 
 [node name="Border" type="ColorRect" parent="MusicSlider"]
@@ -97,8 +97,8 @@ margin_right = 108.0
 margin_bottom = -10.0
 rect_scale = Vector2( 2, 3 )
 mouse_filter = 2
-custom_colors/default_color = Color( 1, 1, 0, 1 )
 custom_fonts/normal_font = SubResource( 1 )
+custom_colors/default_color = Color( 1, 1, 0, 1 )
 text = "sfx"
 
 [node name="Border" type="ColorRect" parent="SFXSlider"]
@@ -137,10 +137,10 @@ margin_right = 260.0
 margin_bottom = 164.0
 rect_scale = Vector2( 2, 3 )
 mouse_filter = 2
-custom_colors/default_color = Color( 0, 0, 1, 1 )
 custom_fonts/normal_font = SubResource( 3 )
-
+custom_colors/default_color = Color( 0, 0, 1, 1 )
 [connection signal="pressed" from="AdvanceButton" to="LevelManager" method="_on_advance_button_pressed"]
+[connection signal="finished" from="SoundTrackPlayer" to="SoundTrackPlayer" method="_on_finished"]
 [connection signal="mouse_entered" from="MusicSlider/Area2D" to="MusicSlider" method="_on_Area2D_mouse_entered"]
 [connection signal="mouse_exited" from="MusicSlider/Area2D" to="MusicSlider" method="_on_Area2D_mouse_exited"]
 [connection signal="mouse_entered" from="SFXSlider/Area2D" to="SFXSlider" method="_on_Area2D_mouse_entered"]
