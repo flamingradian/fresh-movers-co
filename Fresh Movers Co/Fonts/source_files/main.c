@@ -120,8 +120,8 @@ void convert_pix(int x, int y)
 
 	left = x * 1000 / 8;
 	right = (x + 1) * 1000 / 8;
-	top = 800 - (y * 800 / 12);
-	bottom = 800 - ((y + 1) * 800 / 12);
+	top = 800 - (y * 1000 / 12);
+	bottom = 800 - ((y + 1) * 1000 / 12);
 
 	printf("%d %d m 25\n"
 	       " %d %d l 25\n"
