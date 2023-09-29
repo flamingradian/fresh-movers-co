@@ -1,3 +1,5 @@
+# SPDX-License-Identifier: MIT
+
 extends "res://Scripts/Item.gd"
 
 var restartTimer = 0

@@ -1,3 +1,5 @@
+# SPDX-License-Identifier: MIT
+
 extends Node
 
 signal level_complete

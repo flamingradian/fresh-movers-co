@@ -1,3 +1,5 @@
+# SPDX-License-Identifier: MIT
+
 extends Node
 
 onready var itemsList = self.get_children()
