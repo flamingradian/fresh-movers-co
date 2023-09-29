@@ -1,3 +1,5 @@
+# SPDX-License-Identifier: MIT
+
 extends AudioStreamPlayer
 
 var soundTrack = preload("res://Sounds/Fresh Movers Co.wav")

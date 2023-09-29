@@ -1,3 +1,5 @@
+# SPDX-License-Identifier: MIT
+
 extends "res://Scripts/Barrel.gd"
 
 onready var startRotation = self.get_rotation_degrees()

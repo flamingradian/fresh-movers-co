@@ -1,3 +1,5 @@
+# SPDX-License-Identifier: MIT
+
 extends CanvasLayer
 
 onready var levelManager = get_node("/root/Main/LevelManager")

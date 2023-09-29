@@ -1,7 +1,7 @@
 [gd_scene load_steps=5 format=2]
 
 [ext_resource path="res://Fonts/FreshPixel.otf" type="DynamicFontData" id=1]
-[ext_resource path="res://Sprites/background.png" type="Texture" id=2]
+[ext_resource path="res://Sprites/background_sunset.png" type="Texture" id=2]
 [ext_resource path="res://Sprites/ThanksForPlaying.png" type="Texture" id=3]
 
 [sub_resource type="DynamicFont" id=1]

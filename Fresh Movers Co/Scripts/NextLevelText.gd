@@ -1,3 +1,5 @@
+# SPDX-License-Identifier: MIT
+
 extends Sprite
 
 var timeElapsed = 0
