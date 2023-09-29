@@ -64,7 +64,7 @@ var storyTextList = [
 	"",
 	"Use your mouse to drag items into the truck. Press space to drive away.",
 	"'This is harder than it looks. I thought we just had to put them in the truck.'",
-	"'Client: Are you sure this will fit?'",
+	"'Are you sure this will fit?'",
 	"'Our house was a mess. Glad we can finally leave it behind.'",
 	"'Maybe we shouldn’t have stored our items in barrels...'",
 	"'This will be the last obstacle we'll need to move out of our way.'",
