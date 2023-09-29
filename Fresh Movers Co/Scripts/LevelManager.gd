@@ -73,7 +73,7 @@ var storyTextList = [
 	"'This will be the last obstacle we'll need to move out of our way.'",
 	"'Be careful! I have some fragile items in there.'",
 	"'It's great to have someone to lean on. Thank you.'",
-	"'Fragile relationships are the worst! I’m ready to start over.'",
+	"'Relationships are so fragile! I have to start over. Again.'",
 	"'We wanted to move out quickly. This won't cost extra right?",
 	"'It was tough trying to balance everything out.'",
 	"'Please keep these boxes right side up.'",
@@ -127,7 +127,7 @@ func StartLevel():
 		restartButton.visible = false
 		if levelNum > 15:
 			var finalScoreText = get_node("/root/Main/LevelManager/Level/FinalScoreText")
-			finalScoreText.rect_position.x = 880 - str(score).length() * 25
+			finalScoreText.rect_position.x = 840 - str(score).length() * 25
 			finalScoreText.text = str(score) + "/1500"
 	else:
 		scoreText.modulate.a = 1
